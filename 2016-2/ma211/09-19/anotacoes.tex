@@ -1,0 +1,155 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{bbm}
+
+\author{Esdras R. Carmo - 170656}
+\title{Derivadas Direcionais e o Vetor Gradiente}
+\date{\today}
+
+% Comando para derivadas parciais
+\newcommand{\PartialDer}[2] {\frac{\partial #1} {\partial #2}}
+% Comando para a norma
+\newcommand{\norm}[1] {\left.\parallel #1 \right.\parallel}
+
+\begin{document}
+    \maketitle
+    
+    
+    \section{Derivadas Direcionais}
+        \paragraph{}
+        Resolução de problemas para calcular a taxa de variação de função $f(x)$, sendo $x = (x_1, x_2, \dots, x_n)$,
+        no ponto $a = (a_1, a_2, \dots, a_n)$ na direção de um vetor unitário $u = (u_1, \dots, u_n)$.
+
+        \subsection{Definição}
+            \paragraph{}
+            Sendo $u \in \mathbbm{R}^n$:
+
+            \begin{align*}
+                D_u f(a) = \lim_{h \to 0} \frac{f(a + hu) - f(a)} {h}
+            \end{align*}
+
+        \subsection{Derivadas Parciais}
+            \paragraph{}
+            Derivadas direcionais generalizam as derivadas parciais, já que se $u = (1, 0)$ temos $\PartialDer{f(x, y)}{x}$.
+
+            \begin{align*}
+                \PartialDer{f(a, b)}{x} = \lim_{h \to 0} \frac {f( (a, b) + h(1, 0) ) - f(a, b)}{h}
+            \end{align*}
+
+            \paragraph{}
+            Pode-se escrever as derivadas direcionais em função das parciais.
+            \paragraph{}
+            Sendo:
+
+            \begin{align*}
+                g(h) &= f(a + hu)\\
+                g(0) &= \lim_{h \to 0} \frac{g(h) - g(0)} {h} = D_u f(a)\\      
+                \text{Pela regra da cadeia, temos:}\\
+                g(0) &= \sum_{j = 1}^n \PartialDer{f}{x_j} \mid_a u_j
+            \end{align*}
+
+        \subsection{Vetor Gradiente}
+            \paragraph{}
+            Pode-se escrever a derivada direcional de $f$ com relação a $u$ como produto escalar do gradiente $\nabla$:
+
+            \begin{align*}
+                D_u f(x) = \sum_{j = 1}^n \PartialDer{f}{x_j} u_j = \nabla f \cdot u
+            \end{align*}
+
+        \subsection{Interpretação do Vetor Gradiente}
+            \begin{align*}
+                D_u f = \nabla f \cdot u = \norm{\nabla f} \norm{u} \cos{\theta} = \norm{\nabla f} \cos{\theta}
+            \end{align*}
+
+            \paragraph{}
+            Para qualquer direção da derivada, iremos multiplicar o vetor gradiente pelo cosseno do ângulo. Portanto o maior valor
+            possível para a derivada direcional é quando $\theta = 0$, i. e., a maior variação ocorre na direção do vetor gradiente.
+            \paragraph{}
+            Portanto o vetor gradiente nos diz a direção de maior variação da função $f(x)$
+
+            \subsubsection{Em $\mathbbm{R}^2$}
+                \paragraph{}
+                O vetor gradiente $\nabla f(x_0, y_0)$ também é perpendicular (ortogonal) à reta tangente à curva de nível $f(x, y) = k$
+                que passa por $P = (x_0, y_0)$.
+
+            \subsubsection{Em $\mathbbm{R}^3$}
+                \paragraph{}
+                O vetor gradiente $\nabla F(x_0, y_0, z_0)$ é perpendicular ao plano tangente à superfície $F(x, y, z) = k$ que passa
+                por $P = (x_0, y_0, z_0)$.
+
+            \subsubsection{Plano Tangente}
+                \paragraph{}
+                Dado $f$, o plano tangente à $f$ em $(x_0, y_0, z_0)$ é:
+
+                \begin{align*}
+                    z - z_0 &= \PartialDer{f}{x}(x_0, y_0) (x - x_0) + \PartialDer{f}{y}(x_0, y_0) (y - y_0)\\
+                    \nabla F(x_0, y_0, z_0) \cdot (x - x_0, y - y_0, z - z_0) &= 0\\
+                \end{align*}
+
+            \subsubsection{Reta Normal}
+                \paragraph{}
+                O vetor gradiente é múltiplo da reta normal, portanto temos o ponto $P$ e o vetor diretor da reta como
+                $\nabla F(x_0, y_0, z_0)$:
+
+                \begin{align*}
+                    \nabla F (x_0, y_0, z_0) &= \lambda (x - x_0, y - y_0, z - z_0) \text{ , sendo }\lambda \in \mathbbm{R}\\
+                \end{align*}
+
+    \section{Exemplos}
+        \subsection{Exemplo 6}
+            \paragraph{}
+            Determine a derivada direcional sendo $u$ o vetor unitário dado pelo ângulo $\theta = \pi/6$ no ponto $(1, 2)$
+
+            \begin{align*}
+                f(x, y) &= x^3 - 3xy + 4y^2\\
+                D_u f(1, 2) &= \nabla f(1, 2) \cdot u\\
+                \nabla f &= (3x^2 - 3y, -3x + 8y)\\
+                \nabla f(1, 2) &= (-3, 13)\\
+                \text{Determinando o vetor u...}\\
+                u &= (\cos{\pi/6}, \sin{\pi/6}) = (\frac{\sqrt{3}}{2}, \frac{1}{2})\\
+                \text{Portanto, a derivada direcional...}\\
+                D_u f(1, 2) &= \frac{1}{2} (13 - 3\sqrt{3})
+            \end{align*}
+
+        \subsection{Exemplo 7}
+            \paragraph{}
+            Determine a derivada direcional da função no ponto $P = (2, -1)$ na direção $v = 2i + 5j$
+
+            \begin{align*}
+                f(x, y) &= x^2y^3 - 4y\\
+                \nabla f &= (2xy, 3x^2y^2 - 4)\\
+                \nabla f(2, -1) &= (-4, 8)\\
+                D_u f(2, -1) &= \nabla f(2, -1) \cdot u\\
+                \text{$\norm{v} \neq 1$, portanto precisamos encontrar u}\\
+                u &= \frac{v}{\norm{v}} = \frac{2i + 5i} {\sqrt{4 + 25}} = \left(\frac{2}{\sqrt{24}}, \frac{5}{\sqrt{24}}\right)\\
+                D_u f(2, -1) &= \frac{32}{\sqrt{29}}
+            \end{align*}
+
+        \subsection{Exemplo 10}
+            \paragraph{}
+            Determine o plano tangente e a reta normal no ponto $(-2, 1, -3)$ ao elipsóide.
+
+            \begin{align*}
+                x^2 / 4 + y^2 + z^2 / 9 &= 3\\
+                F(x, y, z) &= \frac{x^2}{4} + y^2 + \frac{z^2}{9} - 3
+                \nabla F(x, y, z) &= \left( \frac{x}{2}, 2y, \frac{2y}{9} \right)\\
+                \nabla F(-2, 1, -3) &= (-1, 2, -2/3)\\
+                \text{Portanto agora podemos determinar o plano tangente}\\
+                \nabla F(-2, 1, -3) \cdot (x + 2, y - 1, z + 3) &= 0\\
+                -(x + 2) + 2(y-1) - \frac{2}{3}(z + 3) &= 0\\
+                \text{E a equação da reta normal é dada por}\\
+                (x + 2, y - 1, z + 3) &= \lambda (-1, 2, -2/3)\\
+            \end{align*}
+
+    \begin{appendix}
+        \section{Direção e vetor unitário}
+            \paragraph{}
+            Caso seja pedido a direção, pode ser $v$ com $\norm{v} \neq 1$, porém para os cálculos é necessário um vetor unitário $u$ e se
+            $u$ estiver no mesmo sentido de $v$, então $u = \frac{v}{\norm{v}}$. Portanto é importante sempre checar se o vetor dado é unitário
+            ou não.
+    \end{appendix}
+\end{document}
