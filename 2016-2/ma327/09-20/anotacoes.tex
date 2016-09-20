@@ -17,6 +17,13 @@
 % Comando para a norma
 \newcommand{\norm}[1] {\left.\parallel #1 \right.\parallel}
 
+% Comando para a algebra
+\newcommand{\kernel}[1] {\ker \left( #1 \right)}
+\newcommand{\imagem}[1] {\text{Im} \left( #1 \right)}
+\newcommand{\posto}[1] {\text{Posto} \left( #1 \right)}
+\newcommand{\nul}[1] {\text{Nul} \left( #1 \right)}
+
+
 \begin{document}
     \maketitle
     \paragraph{}
@@ -48,25 +55,25 @@
 
         \subsection{Kernel (Núcleo)}
             \paragraph{}
-            Sendo $A$ a matriz da transformação linear $T$, então $\ker A$ é um subespaço vetorial.
+            Sendo $A$ a matriz da transformação linear $T$, então $\kernel{A}$ é um subespaço vetorial.
 
             \begin{align*}
-                \ker A = \{x \in V \mid T(x) = 0\}\\
+                \kernel{A} = \{x \in V \mid T(x) = 0\}\\
             \end{align*}
 
         \subsection{Imagem}
             \paragraph{}
-            A  imagem Im $A$ é um subespaço vetorial de W tal que: 
+            A  imagem $\imagem{A}$ é um subespaço vetorial de W tal que: 
 
             \begin{align*}
-                \text{Im } A = \{ y \in W \mid \exists\text{ } x \in V, y = T(x) \}\\
+                \imagem{A} = \{ y \in W \mid \exists\text{ } x \in V, y = T(x) \}\\
             \end{align*}
 
     \section{Teorema Posto-nulidade}
         \paragraph{}
         Sendo Nulidade a dimensão do kernel de $A$ e posto a dimensão da imagem de $A$, então:
         \begin{align*}
-            \text{Nul } A + \text{ Posto } A &= \text{ dim } V\\
+            \nul{A} + \posto{A} &= \dim{V}\\
         \end{align*}
 
         \paragraph{}
@@ -75,7 +82,7 @@
 
     \section{Posto-linha e Posto-coluna}
         \begin{align*}
-            \text{Posto } A &= \text{ Posto } A^t\\
+            \posto{A} &= \posto{A^t}\\
         \end{align*}
 
         \paragraph{}
