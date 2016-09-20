@@ -1,0 +1,83 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{bbm}
+
+\author{Esdras R. Carmo - 170656}
+\title{Transformações Lineares}
+\date{\today}
+
+% Comando para conjuntos numéricos
+\newcommand{\REAL} {\mathbbm{R}}
+\newcommand{\COMPLEX} {\mathbbm{C}}
+
+% Comando para a norma
+\newcommand{\norm}[1] {\left.\parallel #1 \right.\parallel}
+
+\begin{document}
+    \maketitle
+    \paragraph{}
+    As transformações lineares podem ser vistas como função que relaciona dois espaços vetoriais,
+    um chamado de domínio e outro de contra-domínio, da seguinte forma: $T: V \longrightarrow W$.
+
+    \section{Axiomas da linearidade}
+        \begin{enumerate}
+            \item $T(v + w) = T(v) + T(w)$
+            \item $T(\lambda v) = \lambda T(v)$
+        \end{enumerate}
+
+    \section{Transformações Lineares como matrizes}
+        \paragraph{}
+        Sendo $T: V \longrightarrow W$ uma transformação linear, temos, se $w \in V$ e $E_n \in W$:
+
+        \begin{align*}
+            w &= \alpha_1 v_1 + \alpha_2 v_2 + \dots + \alpha_n v_n\\
+            T(w) &= T(\alpha_1 v_1 + \alpha_2 v_2 + \dots + \alpha_n v_n)\\
+            T(w) &= \alpha_1 T(v_1) + \alpha_2 T(v_2) + \dots + \alpha_n T(v_n)\\
+            T(v_n) &= E_n\\
+        \end{align*}
+
+        \paragraph{}
+        Dessa forma podemos representar as transformações lineares como multiplicação matricial.
+        Se $T: \REAL^n \longrightarrow \REAL^m$, $X \in \REAL^n$, então $T(X) = AX$ sendo $A$ uma
+        matriz $m \times n$.
+
+        \subsection{Kernel (Núcleo)}
+            \paragraph{}
+            Sendo $A$ a matriz da transformação linear $T$, então $\text{Ker } A$ é um subespaço vetorial.
+
+            \begin{align*}
+                \text{Ker } A = \{x \in V | T(x) = 0\}\\
+            \end{align*}
+
+        \subsection{Imagem}
+            \paragraph{}
+            A  imagem Im $A$ é um subespaço vetorial de W tal que: 
+
+            \begin{align*}
+                \text{Im } A = \{ y \in W | \exists x \in V, y = T(x) \}\\
+            \end{align*}
+
+    \section{Teorema Posto-nulidade}
+        \paragraph{}
+        Sendo Nulidade a dimensão do kernel de $A$ e posto a dimensão da imagem de $A$, então:
+        \begin{align*}
+            \text{Nul } A + \text{ Posto } A &= \text{ dim } V\\
+        \end{align*}
+
+        \paragraph{}
+        Escalonando a matriz $A$, podemos dizer que a quantidade de linhas com zeros é a nulidade de $A$, portanto, a partir desse
+        teorema é possível identificar seu posto.
+
+    \section{Posto-linha e Posto-coluna}
+        \begin{align*}
+            \text{Posto } A &= \text{ Posto } A^t\\
+        \end{align*}
+
+        \paragraph{}
+        Dessa forma, afirmamos que o posto-linha da matriz $A$ é igual ao seu posto-coluna, ou seja, há a mesma quantidade de vetores
+        L.I. em $A$ e $A^t$.
+\end{document}
