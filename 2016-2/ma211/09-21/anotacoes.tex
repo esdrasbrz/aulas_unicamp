@@ -1,0 +1,186 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{bbm}
+
+\author{Esdras R. Carmo - 170656}
+\title{Pontos de máximo, mínimo e sela}
+\date{\today}
+
+% Comando para derivadas parciais
+\newcommand{\PartialDer}[2] {\frac{\partial #1} {\partial #2}}
+% Comando para a norma
+\newcommand{\norm}[1] {\left.\parallel #1 \right.\parallel}
+
+\begin{document}
+    \maketitle
+    
+    \section{Ponto crítico}
+        \subsection{Exemplo 8}
+            \paragraph{}
+            Como exemplo a função $f(x, y) = xy$ possui um ponto estacionário em $(0, 0)$:
+
+            \begin{align*}
+                \nabla f(x, y) &= (y, x)\\
+                \nabla f(0,0) &= (0, 0)\\
+            \end{align*}
+
+            \paragraph{}
+            Porém, $(0,0)$ não é um extremo de $f$. Considerando uma bola aberta $\beta$ que contém
+            $(0,0)$. Se considerarmos $(x_1, y_1)$ no primeiro quadrante e $(x_2, y_2)$ no segundo quadrante, temos:
+
+            \begin{align*}
+                f(x_2, y_2) < f(0,0) < f(x_1, y_1)
+            \end{align*}
+
+            \paragraph{}
+            Dessa forma provamos que $(0,0)$ é um ponto de sela em $f$.
+
+        \subsection{Exemplo 9}
+            \paragraph{}
+            Considerando a função $f(x, y) = x^3 - 3xy^2$ possui um ponto de sela na origem.
+
+            \begin{align*}
+                \nabla f(x, y) &= (3x^2 - 3y^2, -6xy)\\
+                \nabla f(x, y) &= 3 (x^2 - y^2, -2xy)\\
+                \nabla f(x, y) &= 0 \Rightarrow (x, y) = (0,0)\\
+            \end{align*}
+
+            \paragraph{}
+            Assim a função tem um ponto crítico em $(0,0)$.
+
+        \subsection{Exemplo 10}
+            \paragraph{}
+            A função $f(x, y) = x^2y^2$ tem um mínimo absoluto na origem pois $f(x, y) \geq f(0,0) \text{ }\forall\text{ } (x, y) \in \mathbbm{R}^2$.
+    
+    \section{Matriz Hessiana}
+        \paragraph{}
+        A matriz $n \times n$ com derivadas de segunda ordem é chamada matriz Hessiana ($H(\textbf{x})$), que tem o papel
+        de segunda derivada de uma função de $n$ variáveis.
+        \paragraph{}
+        Por exemplo, temos a seguinte matriz Hessiana para 2 variáveis:
+
+        \begin{align*}
+            H(x, y) = 
+            \left[
+                \begin{matrix}
+                    f_{xx}&f_{xy}\\
+                    f_{yx}&f_{yy}\\
+                \end{matrix}
+            \right]
+        \end{align*}
+
+        \subsection{Hessiana do exemplo 9}
+            \begin{align*}
+                H(x, y) = 
+                \left[
+                    \begin{matrix}
+                        6x & -6y\\
+                        -6y & -6x\\
+                    \end{matrix}
+                \right]
+            \end{align*}
+
+        \subsection{Teste com auto-valores}
+            \paragraph{}
+            Se todos os auto-valores de $H(\textbf{a})$ são positivos, $f$ tem um ponto mínimo relativo. Caso todos forem negativos,
+            $f$ tem um ponto de máximo relativo. Caso possua auto-valores positivos e negativos, então $\textbf{a}$ é um ponto de 
+            sela de $f$.
+
+        \subsection{Teste com determinante para $H_{2 \times 2}$}
+            \paragraph{}
+            Para uma função $f$ de duas variáveis $(x, y)$ com derivadas de segunda ordem contínuas, temos o teste de segunda derivada
+            pelo determinante da matriz Hessiana:
+
+            \begin{align*}
+                D &= \left| H(x, y) \right|\\
+            \end{align*}
+            
+            \paragraph{}
+            Assim temos os seguintes casos:
+
+            \begin{itemize}
+                \item Se $D > 0$ e $f_{xx} > 0$, $f$ tem um mínimo relativo;
+                \item Se $D > 0$ e $f_{xx} < 0$, $f$ tem um máximo relativo;
+                \item Se $D < 0$, é um ponto de sela de $f$;
+                \item Se $D = 0$, não podemos deduzir nada sobre $f$.
+            \end{itemize}
+
+    \section{Exemplos}
+        \subsection{Exemplo 15}
+            \paragraph{}
+            Determine pontos máximo, mínimo e sela da função $f(x, y) = x^4 + y^4 - 4xy + 1$.
+
+            \begin{align*}
+                \nabla f(x, y) &= (4x^3 - 4y, 4y^3 - 4x)\\
+                \nabla f(x, y) &= (0, 0)
+            \end{align*}
+
+            \paragraph{}
+            Assim temos a relação:
+
+            \begin{align*}
+                x^3 - y &= 0\\
+                y^3 - x &= 0\\
+                y &= x^3\\
+                x (x^8 - 1) &= 0
+            \end{align*}
+
+            \paragraph{}
+            Temos então com raizes reais:
+
+            \begin{align*}
+                (x_0, y_0) &= (0, 0)\\
+                (x_1, y_1) &= (1, 1)\\
+                (x_2, y_2) &= (-1, -1)\\
+            \end{align*}
+
+            \paragraph{}
+            Calculando a matriz Hessiana:
+
+            \begin{align*}
+                H(x, y) =
+                \left[
+                    \begin{matrix}
+                        12x^2 & -4\\
+                        -4 & 12y^2
+                    \end{matrix}
+                \right]
+            \end{align*}
+
+            \begin{itemize}
+                \item Para o ponto $(0,0)$, temos $\det H(0, 0) = -16$, ponto de sela;
+                \item Para o ponto $(1,1)$, temos $\det H(1, 1) = 12^2 - 16 > 0$, $f_{xx}(1, 1) = 12 > 0$, ponto de mínimo;
+                \item Para o ponto $(-1,-1)$, temos $\det H(-1, -1) = 12^2 - 16 > 0$, $f_{xx}(-1, -1) = 12 > 0$, ponto de mínimo;
+            \end{itemize}
+        
+        \subsection{Exemplo 16}
+            \paragraph{}
+            Determinar a menor distância entre o ponto $(1, 0, -2)$ e o plano $x + 2y + z = 4$
+
+            \begin{align*}
+                d^2 &= (x - 1)^2 + (y - 0)^2 + (z + 2)^2\\
+                z &= 4 - x - 2y \textit{, Pela equação do plano}\\
+            \end{align*}
+
+            \paragraph{}
+            Considerando a seguinte função:
+
+            \begin{align*}
+                f(x, y) &= (x - 1)^2 + y^2 + (6 -x -2y)^2\\
+            \end{align*}
+
+            \paragraph{}
+            Enconstrando um ponto de mínimo para a função $f(x, y)$:
+
+            \begin{align*}
+                \nabla f(x, y) &= \left(2(x - 1) + 2(6 - x - 2y)(-1), 2y + 2(6 - x - 2y)(-2)\right)\\
+                \nabla f(x, y) &= 0\\
+            \end{align*}
+
+            \paragraph{}
+            \textbf{TERMINAR...}
+\end{document}

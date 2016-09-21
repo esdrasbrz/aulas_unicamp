@@ -1,0 +1,69 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{bbm}
+
+\author{Esdras R. Carmo - 170656}
+\title{Oscilações}
+\date{\today}
+
+% Comando para um meio
+\newcommand{\meio}{\frac{1}{2}}
+
+\begin{document}
+    \maketitle
+    
+    \section{Variações periódicas}
+        \subsection{Sistema Massa-Mola}
+            \paragraph{}
+            Igualando a energia mecânica pela energia potêncial e cinética e integrando, obtemos a equação periódica da
+            posição:
+
+            \begin{align*}
+                x(t) &= A\sin{\omega t + \varphi_0}\\
+                x(t) &= A\cos{\omega t + \phi_0}\\
+                T &= \frac{1}{f}\\
+                \omega &= 2\pi f = \frac{2\pi}{T}\\
+                T &= \frac{2\pi}{\omega}
+            \end{align*}
+
+            \paragraph{}
+            $A$, $\phi$ são dados pelas condições iniciais do seu problema (determinar a fase e amplitude), i. e.,
+            $(x(t=0)$ e $v(t=0))$
+
+            \begin{align*}
+                x(t) &= A\cos{\omega t + \phi_0}\\
+                v(t) = \frac{dx}{dt} &= -\omega A \sin{\omega t + \phi}\\
+                a(t) = \frac{d^2x}{dt^2} &= -\omega^2 A \cos{\omega t + \phi} = -\omega^2 x(t)\\
+            \end{align*}
+
+            \paragraph{}
+            Podemos ainda substituir nas equações com base nas seguintes relações:
+
+            \begin{align*}
+                v_{max} &= \omega A\\
+                a_{max} &= \omega^2 A\\
+            \end{align*}
+
+            \subsubsection{Energia mecânica do sistema}
+                \begin{align*}
+                    E &= \meio m\omega^2 A^2 \sin^2{(\omega t + \phi)} + \meio K A^2 \cos^2{(\omega t + \phi)}\\
+                \end{align*}
+
+        \subsection{Pêndulos}
+            \paragraph{}
+            A partir do torque, conseguimos concluir que $\omega = \sqrt{\frac{g}{L}}$, sendo que:
+
+            \begin{align*}
+                \tau &= -r F \sin{\theta} = -Lmg\sin{\theta}\\
+            \end{align*}
+
+            \paragraph{}
+            A mesma relação vale para o pêndulo físico, apenas substituindo $L$ pelo $R_{cm}$, e obtemos
+            $\omega = \sqrt{\frac{R_{cm}mg}{I}}$.
+
+
+\end{document} 
