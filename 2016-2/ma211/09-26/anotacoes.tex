@@ -1,0 +1,187 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{bbm}
+
+\author{Esdras R. Carmo - 170656}
+\title{Multiplicadores de Lagrange}
+\date{\today}
+
+% Comando para derivadas parciais
+\newcommand{\PartialDer}[2] {\frac{\partial #1} {\partial #2}}
+% Comando para a norma
+\newcommand{\norma}[1] {\left.\parallel #1 \right.\parallel}
+
+\begin{document}
+    \maketitle
+    
+    \section{Método dos Multiplicadores de Lagrange}
+        \paragraph{}
+        Resoluções de problemas de otimização com restrições. Dessa forma, se temos $m$ restrições $g_i(x)$, então
+        existem escalares $\lambda_i$ tais que
+
+        \begin{align*}
+            \nabla f = \sum_{i=1}^m \lambda_i g_i(x)
+        \end{align*}
+
+        \paragraph{}
+        Assim precisamos determinar o $x$ e os $\lambda_i$ tais que:
+
+        \begin{align*}
+            \begin{cases}
+                \nabla f(x) &= \sum_{i=1}^m \lambda_i g_i(x)\\
+                g_i(x) &= 0
+            \end{cases}
+        \end{align*}
+
+        \paragraph{}
+        Utilizando os multiplicadores de Lagrande, não faz sentido fazer o teste da matriz Hessiana pois $\nabla f(x) \neq 0$. Além disso,
+        esse método sempre dará os pontos máximos e mínimos, nunca um ponto de sela.
+
+
+        \subsection{Exemplo 1}
+            \paragraph{}
+            Precisamos de $x$, $y$, $z$ que fornecem o volume máximo de uma caixa de $12m^2$ de papelão sem
+            a tampa
+
+            \paragraph{}
+            Precisamos maximizar $f(x, y, z) = xyz$ com a restrição $g(x, y, z) = xy + 2xz + 2yz - 12 = 0$, que é
+            a quantidade de papelão dada no enunciado. Por lagrange, temos:
+
+            \begin{align*}
+                \begin{cases}
+                    \nabla f &= \lambda \nabla g\\
+                    g(x, y, z) &= 0
+                \end{cases}\\
+                \nabla f(x, y, z) &= (yz, xz, xy)\\
+                \nabla g(x, y, z) &= (y + 2z, x + 2z, 2y + 2x)\\
+            \end{align*}
+            \begin{align*}
+                \begin{cases}
+                    yz &= \lambda (y + 2z)\\
+                    xz &= \lambda (x + 2z)\\
+                    xy &= \lambda (2y + 2x)\\
+                    xy + 2yz + 2xz &= 12
+                \end{cases}
+            \end{align*}
+
+            \paragraph{}
+            Resolvendo o sistema não linear, temos, pela primeira e segunda equação:
+
+            \begin{align*}
+                \frac{yz} {y + 2z} &= \frac{xz} {x + 2z} \textit{ , }z \neq 0\\
+                y(x + 2z) &= x(y + 2z)\\
+                2yz &= 2xz \Rightarrow x = y\\
+            \end{align*}
+
+            \paragraph{}
+            Pelas equações 2 e 3, temos:
+
+            \begin{align*}
+                \frac{xz}{x + 2z} &= \frac{xy} {2 (x + y)} \textit{ , }x \neq 0\\
+                2z(x + y) &= y(x + 2z)\\
+                2zx + 2zy &= xy + 2zy\\
+                y &= 2z\\
+            \end{align*}
+
+            \paragraph{}
+            Logo, $x = y = 2z$. Portanto, substituindo na equação 4, temos:
+
+            \begin{align*}
+                x^2 + x^2 + x^2 &= 12\\
+                x &= 2 \textit{ , como }x > 0\\
+            \end{align*}
+
+            \paragraph{}
+            Assim temos $(x, y, z) = (2, 2, 1)$.
+
+        \subsection{Exemplo 2}
+            \paragraph{}
+            Determine os valores extremos de $f(x, y)$ no disco $x^2 + y^2 \leq 1$.
+
+            \begin{align*}
+                f(x, y) &= x^2 + 2y^2\\
+            \end{align*}
+
+            \paragraph{}
+            Encontrando os pontos críticos de $f$.
+
+            \begin{align*}
+                \nabla f &= (2x, 4y) = (0, 0)\\
+                x &= 0\\
+                y &= 0\\
+            \end{align*}
+
+            \paragraph{}
+            Portanto, $(0, 0)$ é um ponto crítico de $f$. Note que $f(0, 0) = 0$, e
+            $(0, 0)$ está no interior do disco. Agora então deveremos encontrar os pontos
+            da fronteira do disco.
+                
+            \paragraph{}
+            Considere maximizar ou minimizar $f(x, y)$ sujeito à $g(x, y) = x^2 + y^2 - 1 = 0$.
+            Note que $y^2 = 1 - x^2$, logo, substituindo em $f$, temos:
+            
+            \begin{align*}
+                \varphi(x) &= -x^2 + 2\\
+                \frac{d\varphi}{dx} (x) &= -2x = 0 \Rightarrow x = 0
+            \end{align*}
+
+            \paragraph{}
+            Então $\varphi$ tem máximo em $x = 0$. Nesse caso, temos $y = \pm 1$ e $f(0, \pm 1) = 2$.
+            Dessa forma $f$ tem valor máximo em $(0, 1)$ e $(0, -1)$ e mínimo em $(0, 0)$.
+
+            \paragraph{}
+            Utilizando o método dos multiplicadores de Lagrange, temos:
+            
+            \begin{align*}
+                \nabla f &= (2x, 4y) \textit{ e } \nabla g = (2x, 2y)\\
+            \end{align*}
+            \begin{align*}
+                \begin{cases}
+                    2x &= \lambda 2x\\
+                    4y &= \lambda 2y\\
+                    x^2 + y^2 &= 1\\
+                \end{cases}
+            \end{align*}
+
+            \paragraph{}
+            Resolvendo o sistema, obtemos as soluções: $(\pm 1, 0)$ e $(0, \pm 1)$.
+            Note que $f(\pm 1, 0) = 1$ e $f(0, \pm 1) = 2$. Então o máximo é $2$ e o mínimo $0$ (que 
+            se encontra no interior da região).
+
+        \subsection{Exemplo 3}
+            \paragraph{}
+            Determine o valor máximo da função $f(x, y, z) = x + 2y + 3z$ na curva da intersecção do plano
+            $x - y + z = 1$ com o cilindro $x^2 + y^2 = 1$.
+            \paragraph{}
+            Assim precisamos maximizar a função $f$ sendo que $(x, y, z)$ satisfaz $g_1(x, y, z) = x - y + z - 1 = 0$ e $g_2(x, y, z) = x^2 + y^2 - 1 = 0$.
+
+            \paragraph{}
+            Pelo método dos Multiplicadores de Lagrange, temos:
+            
+            \begin{align*}
+                \begin{cases}
+                    \nabla f &= \lambda \nabla g_1 + \gamma \nabla g_2\\
+                    g_1(x, y, z) &= 0\\
+                    g_2(x, y, z) &= 0\\
+                \end{cases}\\
+                \begin{cases}
+                    1 &= \lambda + 2\gamma x\\
+                    2 &= -\lambda + 2\gamma y\\
+                    3 &= \lambda\\
+                    x - y + z &= 1\\
+                    x^2 + y^2 &= 1\\
+                \end{cases}\\
+                \begin{cases}
+                    x &= -\frac{1}{\gamma}\\
+                    y &= \frac{5}{2\gamma}\\
+                \end{cases}\\
+                \text{De (5), temos}\\
+                \gamma &= \pm \frac{\sqrt{29}}{2}\\
+            \end{align*}
+
+            \textbf{TERMINAR}
+\end{document}
