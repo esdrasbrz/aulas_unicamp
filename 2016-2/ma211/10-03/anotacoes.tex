@@ -1,0 +1,91 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{bbm}
+
+\author{Esdras R. Carmo - 170656}
+\title{Integrais Duplas sobre Retângulos}
+\date{\today}
+
+% Comando para integral dupla sobre retângulo
+\newcommand{\doubleint}[1] {\iint\limits_R #1 dA}
+
+\begin{document}
+    \maketitle
+   
+    \section{Definição de Retângulo}
+        Dado dois intervalos, podemos definir o retângulo $R$ como o produto cartesiano
+        entre eles, ou seja, todas as possibilidades de $(x, y) \in \mathbbm{R}^2$
+        que satisfazem ambos os intervalos:
+
+        \begin{align*}
+            R = [a, b] \times [c, d] = \{(x, y) \in \mathbbm{R}^3 \mid a \leq x \leq b, c \leq y \leq d\}
+        \end{align*}
+
+    \section{Volume de $f$ definido em um retângulo}
+        Dado uma função $f: \mathbbm{R}^2 \longrightarrow \mathbbm{R}$, podemos aproximar
+        o volume dela em $R$ como:
+
+        \begin{align*}
+            V &\approx \sum_{i=1}^n \sum_{j=1}^n f(x_i, y_j) \Delta A\\
+            \Delta A &= \Delta x \cdot \Delta y\\
+        \end{align*}
+
+        Quando $n \to \infty$, temos:
+
+        \begin{align*}
+            \doubleint{f(x,y)} = \lim_{m,n \to \infty} \sum_{i=1}^m \sum_{j=1}^n f(x_i, y_j) \Delta A\\
+        \end{align*}
+
+        Chamada a integral dupla de Riemann.
+
+        \subsection{Propriedades da Integral Dupla}
+            Analogamente com o que temos para a integral simples, segue:
+
+            \begin{align*}
+                \doubleint{(f(x,y) + g(x, y))} &= \doubleint{f(x, y)} + \doubleint{g(x, y)}\\
+                \doubleint{c f(x, y)} &= c \doubleint{f(x, y)}
+            \end{align*}
+            E ainda temos um comportamento linear, pois se $f(x, y) \geq g(x, y)$ $\forall$ $x, y \in \mathbbm{R}$, então:
+
+            \begin{align*}
+                \doubleint{f(x,y)} \geq \doubleint{g(x,y)}
+            \end{align*}
+
+        \subsection{Valor Médio de $f$}
+            O valor médio da função $f$ no retângulo $A$ é dado por:
+
+            \begin{align*}
+                \bar{f} &= \frac{1}{A(R)} \doubleint{f(x,y)}
+            \end{align*}
+            Em que $A(R)$ é a área do retângulo $R$.
+            
+            \paragraph{}
+            Além disso, se $f(x,y) > 0$, então:
+            
+            \begin{align*}
+                A(R) \cdot \bar{f} &= \doubleint{f(x,y)}
+            \end{align*}
+
+        \subsection{Teorema de Fubini}
+            Por Teorema de Fubini, podemos definir nossa integral dupla sobre retângulo
+            da seguinte forma:
+
+            \begin{align*}
+                R &= [a,b] \times [c, d]\\
+                V &= \int_a^b A(x) dx\\
+                V &= \int_a^b \int_c^d f(x,y) dy dx\\
+            \end{align*}
+
+        \subsection{Caso especial para função produto}
+            Caso temos uma função $f(x,y) = g(x) \cdot h(y)$, então podemos:
+
+            \begin{align*}
+                R &= [a,b] \times [c,d]\\
+                \doubleint{f(x,y)} &= \int_a^b \left( \int_c^d g(x) h(y) dy \right) dx\\
+                \doubleint{f(x,y)} &= \int_a^b g(x) dx \cdot \int_c^d h(y) dy
+            \end{align*}
+\end{document}
