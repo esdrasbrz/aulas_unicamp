@@ -1,0 +1,110 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{bbm}
+
+\author{Esdras R. Carmo - 170656}
+\title{Isomorfismos}
+\date{\today}
+
+% Comando para conjuntos numéricos
+\newcommand{\REAL} {\mathbbm{R}}
+\newcommand{\COMPLEX} {\mathbbm{C}}
+
+% Comando para a norma
+\newcommand{\norm}[1] {\left.\parallel #1 \right.\parallel}
+
+% Comando para a algebra
+\newcommand{\kernel}[1] {\ker \left( #1 \right)}
+\newcommand{\imagem}[1] {\text{Im} \left( #1 \right)}
+\newcommand{\posto}[1] {\dim{\left( \imagem{#1} \right)}}
+\newcommand{\nul}[1] {\dim{ \left( \kernel{#1} \right) }}
+\newcommand{\deffunc}[3] {#1: #2 \longrightarrow #3}
+
+% theorems
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{example}{Exemplo}[section]
+\newtheorem{definition}{Definição}[section]
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+\begin{document}
+    \maketitle
+
+    \section{Trasformação isomorfismo}
+        \begin{definition}
+            $\deffunc{T}{V}{W}$ linear é isomorfismo se $T$ é bijetora. Escrevemos
+            $V \cong W$.
+        \end{definition}
+
+        \begin{theorem}
+            Se $V$ é espaço vetorial tal que $\textit{dim}_F V = n < \infty$, então
+            $V \cong F^n$.
+        \end{theorem}
+        O Teorema fala que "vetores são equivalentes a coordenadas" em algum sentido.
+        \begin{proof}
+            Peguem $B = {v_1, \dots, v_n}$ base ordenada de $V$.
+            Agora definimos uma transformação linear $\deffunc{T}{V}{F^n}$ da seguinte
+            forma: 
+            
+            \begin{align*}
+                v \mapsto [v]_B &= \begin{pmatrix}c_1\\c_2\\\vdots\\c_n\end{pmatrix}
+            \end{align*}
+
+            Assim podemos demonstrar que $T$ é linear, sobrejetora e injetora (por construção).
+        \end{proof}
+
+        \subsection{Relação entre dimensões}
+            \begin{theorem}
+                Sejam $V$, $W$ espaços vetoriais com dimensão finita. Então $V \cong W \Leftrightarrow \dim{V} = \dim{W}$
+            \end{theorem}
+            \begin{proof}
+                $\Rightarrow$ Se $V \cong W$, então $\exists \deffunc{T}{V}{W}$ isomorfismo (i. e., bijetora e linear).
+                Assim $\nul{T} = 0$ e $\posto{T} = \dim W$
+
+                \paragraph{}
+                Através do teorema posto-nulidade, temos:
+
+                \begin{align*}
+                    \dim{V} = \nul{T} + \posto{T} = 0 + \dim{W} = \dim{W}
+                \end{align*}
+
+                \paragraph{}
+                $\Leftarrow$ Se $\dim{V} = \dim{W} = n$, então $V \cong F^n$ e $F^n \cong W$, portanto,
+                $\exists \deffunc{T}{V}{F^n}$ isomorfismo $\deffunc{S}{F^n}{W}$ isomorfismo. Logo:
+
+                \begin{align*}
+                    \deffunc{T \circ S}{V}{W} \textit{ isomorfismo}
+                \end{align*}
+            \end{proof}
+
+    \section{Exemplos}
+        \begin{example}
+            Existe um isomorfismo entre
+
+            \begin{align*}
+                U &= \{a + bx + cx^2 + dx^3 \mid a - b = 0 = c - d\}\\
+                W &= \left\{ \begin{pmatrix}x&y\\z&w\end{pmatrix} \mid x = 0 = z - 3y \right\}
+            \end{align*}
+
+            Precisamos de bases de $U$ e $W$.
+
+            \begin{align*}
+                U &\Rightarrow t + tx + sx^2 + sx^3 = t(1 + x) + s(x^2 + x^3)\\
+                W &\Rightarrow \begin{pmatrix}0&t\\3t&s\end{pmatrix} =
+                    t\begin{pmatrix}0&1\\3&0\end{pmatrix} + s\begin{pmatrix}0&0\\0&1\end{pmatrix}
+            \end{align*}
+            
+            Note que os geradores são L.I., logo são bases. Portanto criamos $\deffunc{T}{U}{W}$ definindo:
+
+            \begin{align*}
+                T(1 + x) &= \begin{pmatrix}0&1\\3&0\end{pmatrix}\\
+                T(x^2 + x^3) &= \begin{pmatrix}0&0\\0&1\end{pmatrix}
+            \end{align*}
+
+            Além disso existe inversa, apenas invertendo os geradores da imagem com os do domínio.
+        \end{example}
+\end{document}

@@ -1,0 +1,57 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{bbm}
+
+\author{Esdras R. Carmo - 170656}
+\title{Transformação Inversa}
+\date{\today}
+
+% Comando para conjuntos numéricos
+\newcommand{\REAL} {\mathbbm{R}}
+\newcommand{\COMPLEX} {\mathbbm{C}}
+
+% Comando para a norma
+\newcommand{\norm}[1] {\left.\parallel #1 \right.\parallel}
+
+% Comando para a algebra
+\newcommand{\kernel}[1] {\ker \left( #1 \right)}
+\newcommand{\imagem}[1] {\text{Im} \left( #1 \right)}
+\newcommand{\posto}[1] {\dim{\left( \imagem{#1} \right)}}
+\newcommand{\nul}[1] {\dim{ \left( \kernel{#1} \right) }}
+\newcommand{\deffunc}[3] {#1: #2 \longrightarrow #3}
+
+% theorems
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{example}{Exemplo}[section]
+\newtheorem{definition}{Definição}[section]
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+\begin{document}
+    \maketitle
+    
+    \section{Inversas a esquerda e a direita}
+        \begin{definition}
+            $\deffunc{T}{V}{W}$ linear.
+
+            \begin{itemize}
+                \item Uma aplicação $\deffunc{L}{\imagem{T}}{V}$ é uma inversa
+                    a esquerda se \begin{align*}(L \circ T) v = v\text{ } \forall\text{ }v \in V\end{align*}
+                \item Uma aplicação $\deffunc{R}{\imagem{T}}{V}$ é inversa a direita se 
+                    \begin{align*}(T \circ R) w = w\text{ }\forall\text{ }w \in \imagem{T}\end{align*}
+            \end{itemize}
+        \end{definition}
+
+        \begin{theorem}
+            $V$, $W$ dimensão finita (talvez diferentes). Se $\deffunc{T}{V}{W}$ tem uma inversa
+            a esquerda $L$, então $T$ também tem uma inversa a direita. Além disso, $L$ é única
+        \end{theorem}
+        
+        \begin{theorem}
+            $\deffunc{T}{V}{W}$ linear. Então $T$ tem uma inversa a esquerda $\Leftrightarrow$ $T$ é injetora.
+        \end{theorem}
+\end{document}
