@@ -4,6 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[portuguese]{babel}
 \usepackage{amsmath}
+\usepackage{amsthm}
 \usepackage{bbm}
 
 \author{Esdras R. Carmo - 170656}
@@ -12,6 +13,10 @@
 
 % Comando para integral dupla sobre retângulo
 \newcommand{\doubleint}[1] {\iint\limits_R #1 dA}
+
+% Definição para os exemplos
+\theoremstyle{definition}
+\newtheorem{example}{Exemplo}[section]
 
 \begin{document}
     \maketitle
@@ -88,4 +93,77 @@
                 \doubleint{f(x,y)} &= \int_a^b \left( \int_c^d g(x) h(y) dy \right) dx\\
                 \doubleint{f(x,y)} &= \int_a^b g(x) dx \cdot \int_c^d h(y) dy
             \end{align*}
+
+
+    \section{Exemplos}
+        \begin{example}
+            Calcule a integral dupla:
+
+            \begin{align*}
+                \doubleint{(x - 3y^2)}
+            \end{align*}
+
+            Em que:
+
+            \begin{align*}
+                R = \{ (x,y) \in \mathbbm{R} \mid 0 \leq x \leq 2, 1 \leq y \leq 2\}
+            \end{align*}
+
+            Separando a integral e calculando a integral iterada, temos:
+
+            \begin{align*}
+                \doubleint{(x - 3y^2)} &= \int_0^2 \int_1^2 (x - 3y^2) dy dx\\
+                &= \int_0^2 \left[ xy - y^3 \right]_1^2 dx\\
+                &= \int_0^2 (x - 7) dx\\
+                &= \left[ \frac{x^2}{2} - 7x \right]_0^2\\
+                \doubleint{(x - 3y^2)} &= -12\\
+            \end{align*}
+        \end{example}
+
+        \begin{example}
+            Calcule a integral dupla
+
+            \begin{align*}
+                \doubleint{y\sin{(xy)}}
+            \end{align*}
+            em que
+            \begin{align*}
+                R = [1,2] \times [0, \pi]
+            \end{align*}
+
+            Note que se iniciarmos a integrar por $dy$, teremos um processo muito
+            mais trabalhoso, portanto faremos:
+
+            \begin{align*}
+                \doubleint{y\sin{(xy)}} &= \int_0^\pi \int_1^2 y \sin{(xy)} dx dy\\
+                &= \int_0^\pi \left[-\cos{(xy)}\right]_1^2 dy\\
+                &= - \int_0^\pi (\cos{(2y)} \cos{y}) dy\\
+                &= - \left[ \frac{\sin{(2y)}}{2} - \sin{y} \right]_0^\pi\\
+                \doubleint{y\sin{(xy)}} &= 0
+            \end{align*}
+        \end{example}
+
+        \begin{example}
+            Determine o volume do sólido $S$ que é delimitado pelo paraboloide
+            elíptico:
+
+            \begin{align*}
+                x^2 + 2y^2 + z &= 16
+            \end{align*}
+
+            e pelos planos $x = 2$, $y = 2$ e pelos três planos coordenados.
+
+            \paragraph{}
+            Note que a região de integração é o mesmo que $R = [0,2] \times [0,2]$.
+            Além disso, temos $z = f(x,y)$ onde $f(x,y) = 16 - x^2 - 2y^2$. Portanto:
+
+            \begin{align*}
+                V &= \doubleint{f(x,y)}\\
+                V &= \int_0^2 \int_0^2 [16 - x^2 - 2y^2] dx dy\\
+                V &= \int_0^2 \left[ 16x - \frac{x^3}{3} - 2y^2x \right]_0^2 dy\\
+                V &= \int_0^2 \left[ 32 - \frac{8}{3} - 4y^2 \right] dy\\
+                V &= \left[ 32y - \frac{8y}{3} - \frac{4}{3} y^3 \right]_0^2\\
+                V &= 48
+            \end{align*}
+        \end{example}
 \end{document}
