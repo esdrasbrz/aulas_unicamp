@@ -22,6 +22,7 @@
 \newcommand{\imagem}[1] {\text{Im} \left( #1 \right)}
 \newcommand{\posto}[1] {\dim{\left( \imagem{#1} \right)}}
 \newcommand{\nul}[1] {\dim{ \left( \kernel{#1} \right) }}
+\newcommand{\Span}[1] {\text{span} \left\{ #1 \right\}}
 \newcommand{\deffunc}[3] {#1: #2 \longrightarrow #3}
 
 % theorems
@@ -54,4 +55,54 @@
         \begin{theorem}
             $\deffunc{T}{V}{W}$ linear. Então $T$ tem uma inversa a esquerda $\Leftrightarrow$ $T$ é injetora.
         \end{theorem}
+
+        \begin{definition}
+            Se $\deffunc{T}{V}{W}$ linear com inversa a esquerda, denotamos a únicda
+            inversa a esquerda com $\deffunc{T^{-1}}{\imagem{T}}{V}$ e dizemos que $T$ é 
+            invertível.
+        \end{definition}
+
+        \begin{theorem}
+            Se $\deffunc{T}{V}{W}$ isomorfismo $\Rightarrow \deffunc{T^{-1}}{W}{V}$ é isomorfismo.
+        \end{theorem}
+
+    \section{Exemplos}
+        \begin{example}
+            Definimos $\deffunc{T}{P_1(\REAL)}{\REAL^3}$ como $a + bx \mapsto (a, 2b, a + b)$
+
+            \begin{align*}
+                \kernel{T} &= \{a + bx \mid (a, 2b, a + b) = (0, 0, 0)\} = \{(0, 0, 0)\}\\
+            \end{align*}
+
+            Dessa forma, concluimos que $T$ é injetora e possui inversa a esquerda. Agora a construímos:
+
+            \begin{align*}
+                \imagem{T} &= \Span{ (1, 0, 1), (0, 2, 1) }\\
+                \deffunc{T^{-1}}{\imagem{T}}{P_1(\REAL)}\\
+                (1, 0, 1) &\mapsto 1\\
+                (0, 2, 1) &\mapsto x\\
+                (\alpha, \beta, \gamma) &\mapsto \alpha + \frac{\beta}{2} x
+            \end{align*}
+
+            \textbf{Verificar!}
+        \end{example}
+
+        \begin{example}
+            Definimos $\deffunc{T}{\REAL^3}{\REAL^2}$ como $(x, y, z) \mapsto (x - z, 2z + y)$.
+
+            \begin{align*}
+                \imagem{T} &= \Span{(1, 0), (0, 1), (-1, 2)} = \REAL^2\\
+                \kernel{T} &= \Span{(1, -2, 1)} \neq \{(0, 0, 0)\}\\
+            \end{align*}
+
+            $T$ não é injetora, logo $T$ não tem inversa a esquerda. No entando, existem
+            mais de uma inversa direita.
+
+            \begin{align*}
+                R_1 : \REAL^2 \to \REAL^3 \text{  } (a, b) &\mapsto (a, b, 0)\\
+                R_2 : \REAL^2 \to \REAL^3 \text{  } (a, b) &\mapsto \left(a + \frac{b}{2}, 0, \frac{b}{2}\right)\\
+            \end{align*}
+
+            \textbf{Verificar!}
+        \end{example}
 \end{document}
