@@ -1,0 +1,173 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{bbm}
+
+\author{Esdras R. Carmo - 170656}
+\title{Mudança de Base}
+\date{\today}
+
+% Comando para conjuntos numéricos
+\newcommand{\REAL} {\mathbbm{R}}
+\newcommand{\COMPLEX} {\mathbbm{C}}
+
+% Comando para a norma
+\newcommand{\norm}[1] {\left.\parallel #1 \right.\parallel}
+
+% Comando para a algebra
+\newcommand{\kernel}[1] {\ker \left( #1 \right)}
+\newcommand{\imagem}[1] {\text{Im} \left( #1 \right)}
+\newcommand{\posto}[1] {\dim{\left( \imagem{#1} \right)}}
+\newcommand{\nul}[1] {\dim{ \left( \kernel{#1} \right) }}
+\newcommand{\deffunc}[3] {#1: #2 \longrightarrow #3}
+\newcommand{\mudabase}[3] {#1_{#2 \leftarrow #3}}
+\newcommand{\vetor}[2] {\begin{pmatrix}#1\\#2\end{pmatrix}} % cria matriz coluna 2 x 1
+\newcommand{\matriz}[4] {\begin{pmatrix}#1&#2\\#3&#4\end{pmatrix}}
+
+% theorems
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{example}{Exemplo}[section]
+\newtheorem{definition}{Definição}[section]
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+\begin{document}
+    \maketitle
+
+    \section{Notações}
+        Escrevemos a mudança de base da seguinte forma:
+
+        \begin{align*}
+            [X]_{B_1} &= \mudabase{M}{B_1}{B_2} [X]_{B_2}\\
+            [X]_{B_2} &= \mudabase{M}{B_2}{B_1} [X]_{B_1}\\
+        \end{align*}
+
+        É mais fácil se $B_1$ é canônica começar por ela.
+
+        \paragraph{}
+        No entanto, outros livros podem acabar com nossa vida fazendo outras notações,
+        como $[M]_{B_1}^{B_2}$ e $[M]_{B_2}^{B_1}$
+
+    \section{Exemplos}
+        \begin{example}
+            Seja $X = \vetor{1}{0} \in \REAL^2$ vetor e $B_3 = \left\{ v_1 = \vetor{1}{1}, v_2 = \vetor{0}{3} \right\}$.
+            O que é $[X]_{B_3}$?
+
+            \paragraph{}
+            Pela primeira solução, basta resolvermos o sistema:
+
+            \begin{align*}
+                c_1v_1 + c_2v_2 &= X\\
+                c_1\vetor{1}{1} + c_2\vetor{0}{3} &= \vetor{1}{0}\\
+            \end{align*}
+            Assim, basta encontrar $c_1$ e $c_2$. Mas esta solução é sem graça, portanto
+            faremos da segunda forma.
+
+            \paragraph{}
+            Pela segunda solução, seja $B_1 = \left\{ e_1 = \vetor{1}{0}, e_2 = \vetor{0}{1} \right\}$ canônica, observamos
+            que $X = 1 \cdot e_1 + 0 \cdot e_2$. Comparando $B_1$ e $B_3$, podemos calcular:
+
+            \begin{align*}
+                [X]_{B_1} &= \mudabase{M}{B_1}{B_3} [X]_{B_3}\\
+            \end{align*}
+
+            Note que $\mudabase{M}{B_1}{B_3}$ possui colunas com as coordenadas dos vetores na base $B_3$
+            com relação a $B_1$ (canônica). Portanto:
+
+            \begin{align*}
+                \mudabase{M}{B_1}{B_3} &= \matriz{1}{0}{1}{3}\\
+                \vetor{1}{0} &= \matriz{1}{0}{1}{3} \cdot \vetor{c_1}{c_2}\\
+                \vetor{c_1}{c_2} &= \matriz{1}{0}{1}{3}^{-1} \cdot \vetor{1}{0} = \matriz{1}{0}{-1/3}{1/3} \cdot \vetor{1}{0} = \vetor{1}{-1/3}
+            \end{align*}
+        \end{example}
+
+        \begin{example}
+            Seja $X = \vetor{4}{2} \in \REAL^2$. Qual é a relação entre $[X]_{B_2}$ e $[X]_{B_3}$?
+
+            \paragraph{}
+            Considerando $B_1$ canônica, e ainda:
+
+            \begin{align*}
+                B_2 &= \left\{ u_1 = \vetor{1}{2}, u_2 = \vetor{2}{1} \right\}\\
+                B_3 &= \left\{ v_1 = \vetor{1}{1}, v_2 = \vetor{0}{3} \right\}
+            \end{align*}
+
+            Escrevemos então $[X]_{B_2}$ e $[X]_{B_3}$ manualmente fazendo cálculos diretos:
+
+            \begin{align*}
+                \vetor{4}{2} &= 0 \vetor{1}{2} + 2 \vetor{2}{1} = 0.u_1 + 2.u_2 \Rightarrow [X]_{B_2} = \vetor{0}{2}\\
+                \vetor{4}{2} &= 4 \vetor{1}{1} - \frac{2}{3} \vetor{0}{3} = 4.v_1 - \frac{2}{3}v_2 \Rightarrow [X]_{B_3} = \vetor{4}{-\frac{2}{3}}\\
+            \end{align*}
+
+            Observamos também $[X]_{B_1} = \vetor{4}{2}$ e possuímos as relações:
+
+            \begin{align*}
+                [X]_{B_1} &= \mudabase{M}{B_1}{B_2} [X]_{B_2}\\
+                [X]_{B_1} &= \mudabase{M}{B_1}{B_3} [X]_{B_3}\\
+            \end{align*}
+
+            Como as matrizes são invertíveis, temos:
+
+            \begin{align*}
+                [X]_{B_2} &= (\mudabase{M}{B_1}{B_2})^{-1} [X]_{B_1}
+            \end{align*}
+
+            Da segunda relação, temos:
+
+            \begin{align*}
+                [X]_{B_2} &= (\mudabase{M}{B_1}{B_2})^{-1} \mudabase{M}{B_1}{B_3} [X]_{B_3}\\
+                (\mudabase{M}{B_1}{B_2})^{-1} \mudabase{M}{B_1}{B_3} &= \mudabase{M}{B_2}{B_3} = \mudabase{M}{B_2}{B_1}\mudabase{M}{B_1}{B_3}
+            \end{align*}
+        \end{example}
+
+    \section{Representação Matricial}
+        Agora partiremos de um $\deffunc{T}{V}{W}$ linear e chegaremos a uma matriz.
+
+        \subsection{Exemplos}
+            \begin{example}
+                Seja:
+                
+                \begin{align*}
+                    \deffunc{T}{\mathbbm{P}_1(\REAL)}{\mathbbm{P}_2(\REAL)}\\
+                    a + bx \mapsto b + ax^2\\
+                \end{align*}
+
+                Base de saída é $B_1$ e de chegada $B_2$:
+
+                \begin{align*}
+                    B_1 &= \{ 1 + x, x \}\\
+                    B_2 &= \{ 1 - x^2, x, x^2 \}
+                \end{align*}
+
+                Queremos $\mudabase{T}{B_2}{B_1}$. Assim faremos:
+
+                \begin{align*}
+                    T(1 + x) &= 1 + x^2 = 1 (1 - x^2) + 0.x + 2.x^2\\
+                    T(x) &= 1 = 1 (1 - x^2) + 0.x + 1.x^2\\
+                \end{align*}
+
+                Assim, temos a transformação como colunas das coordenadas encontradas:
+
+                \begin{align*}
+                    \mudabase{T}{B_2}{B_1} &= \begin{pmatrix}1&1\\0&0\\2&1\end{pmatrix}
+                \end{align*}
+
+                \paragraph{}
+                Note que agora essa representação matricial funciona para calcular $T(v)$ com
+                $v = 2 + 3x$. Fazendo a mudança de coordenada:
+
+                \begin{align*}
+                    v &= 2 + 3x = 2.(1 + x) + 1.x \Rightarrow [v]_{B_1} = \vetor{2}{1}\\
+                    T(v) &= 3 + 2x^2 = 3.(1 - x^2) + 0.x + 5.x^2 \Rightarrow [T(v)]_{B_2} = \begin{pmatrix}3\\0\\5\end{pmatrix}
+                \end{align*}
+
+                Agora observamos que:
+
+                \begin{align*}
+                    \begin{pmatrix}3\\0\\5\end{pmatrix} &= \mudabase{T}{B_2}{B_1} [v]_{B_1} = \begin{pmatrix}1&1\\0&0\\2&1\end{pmatrix} \cdot \vetor{2}{1}
+                \end{align*}
+            \end{example}
+\end{document}
