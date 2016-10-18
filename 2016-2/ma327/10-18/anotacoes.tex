@@ -1,0 +1,164 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{bbm}
+
+\author{Esdras R. Carmo - 170656}
+\title{Diagonalização}
+\date{\today}
+
+% Comando para conjuntos numéricos
+\newcommand{\REAL} {\mathbbm{R}}
+\newcommand{\COMPLEX} {\mathbbm{C}}
+\newcommand{\POL}[1] {\mathbbm{P}_{#1} (\REAL)}
+
+% Comando para a norma
+\newcommand{\norm}[1] {\left.\parallel #1 \right.\parallel}
+
+% Comando para a algebra
+\newcommand{\kernel}[1] {\ker \left( #1 \right)}
+\newcommand{\imagem}[1] {\text{Im} \left( #1 \right)}
+\newcommand{\posto}[1] {\dim{\left( \imagem{#1} \right)}}
+\newcommand{\nul}[1] {\dim{ \left( \kernel{#1} \right) }}
+\newcommand{\deffunc}[3] {#1: #2 \longrightarrow #3}
+\newcommand{\mudabase}[3] {#1_{#2 \leftarrow #3}}
+\newcommand{\vetord}[2] {\begin{pmatrix}#1\\#2\end{pmatrix}} % cria matriz coluna 2 x 1
+\newcommand{\vetort}[3] {\begin{pmatrix}#1\\#2\\#3\end{pmatrix}} % cria matriz coluna 3 x 1
+\newcommand{\matriz}[4] {\begin{pmatrix}#1&#2\\#3&#4\end{pmatrix}}
+
+% theorems
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{example}{Exemplo}[section]
+\newtheorem{definition}{Definição}[section]
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+\begin{document}
+    \maketitle
+
+    \section{Definições úteis}
+        \begin{theorem}
+            $\deffunc{T}{V}{V}$ linear, $\dim T = n < \infty$. Então $T$ é diagonalizável $\Leftrightarrow \exists \beta$ base
+            ordenada de autovetores.
+        \end{theorem}
+
+        \begin{theorem}
+            (Autovetores correspondentes a autovalores distintos são sempre L.I.). Seja $\deffunc{T}{V}{V}$ linear e $(\lambda_1, v_1)$, ... ,
+            $(\lambda_k, v_k)$ autopares tais que $\lambda_1, \dots, \lambda_k$ são todos distintos $\Rightarrow$ o conjunto
+            $\{v_1, \dots, v_k\}$ é L.I.
+        \end{theorem}
+
+        Neste caso, se $k = \dim V$, então existe base de auto vetores, logo $T$ é diagonalizável. No entanto essa condição é somente necessária,
+        não valendo a inversa.
+
+    \section{Exemplos}
+        \begin{example}
+            Vamos encontrar uma base de autovetores para $A$:
+            \[
+                A  = \begin{pmatrix}
+                        1&1&1\\
+                        1&1&1\\
+                        1&1&1
+                     \end{pmatrix}
+            \]
+
+            Temos que, $\forall v \in \REAL^3$ $T(v) = (x + y + z) \begin{pmatrix}1\\1\\1\end{pmatrix}$ e queremos que
+            \[
+                (x + y + z) \begin{pmatrix}1\\1\\1\end{pmatrix} = \lambda \begin{pmatrix}x\\y\\z\end{pmatrix}
+            \]
+
+            Se $v_1 = \begin{pmatrix}1\\1\\1\end{pmatrix}$, então:
+            \[
+                T(v_1) = \begin{pmatrix}3\\3\\3\end{pmatrix} = 3 \begin{pmatrix}1\\1\\1\end{pmatrix} = 3 v_1
+            \]
+
+            Note que se os vetores não forem múltiplos de $v_1$, então a equação não teria solução a menos que os dois lados
+            sejam 0, i. e., $\lambda = 0$.
+
+            Portanto, adivinhando outros autovetores temos:
+
+            \begin{align*}
+                v_2 &= \begin{pmatrix}-2\\1\\1\end{pmatrix}\\
+                v_3 &= \begin{pmatrix}0\\1\\-1\end{pmatrix}
+            \end{align*}
+
+            Logo $v_1, v_2, v_3$ é base de autovetores.
+
+            
+            De outra forma podemos calcular a solução do polinômio característico:
+
+            \begin{align*}
+                P(\lambda) &= \det{(A - \lambda I)} = \lambda^2 (3 - \lambda) = 0\\
+                \lambda_1 &= 3\\
+                \lambda_2 &= \lambda_3 = 0
+            \end{align*}
+
+            E assim podemos calcular os subespaços dos lambda:
+
+            \begin{align*}
+                V_3 &= \left\{ \vetort{1}{1}{1} \right\}\\
+                V_0 &= \left\{ \vetort{1}{0}{-1}, \vetort{0}{1}{-1} \right\}\\
+            \end{align*}
+
+            Temos que os 3 autovetores encontrados são L.I.. Como $V = \REAL^3$ espaço de 
+            $\dim = 3$, então temos uma base de $\REAL^3$. Sendo $\gamma$ a base ordenada com os autovetores, i. e.,
+
+            \[
+                \gamma = \left\{ \vetort{1}{1}{1}, \vetort{1}{0}{-1}, \vetort{0}{1}{-1} \right\}
+            \]
+
+            Assim podemos determinar a matriz diagonalizada como:
+
+            \[
+                \mudabase{T}{\gamma}{\gamma} = \begin{pmatrix}3&0&0\\0&0&0\\0&0&0\end{pmatrix}
+            \]
+        \end{example}
+
+        \begin{example}
+            \begin{align*}
+                \deffunc{T}{\POL{1}}{\POL{1}}\\
+                a + bx \mapsto (5a + 4b) + (-3a -2b)x
+            \end{align*}
+            
+            Queremos autovalores, autovetores, é diagonalizável?
+
+            Escolhemos $\beta = \{1, x\}$ canônica, então:
+
+            \begin{align*}
+                T(1) &= 5 - 3x\\
+                T(x) &= 4 - 2x\\
+                \mudabase{T}{\beta}{\beta} &= \matriz{5}{4}{-3}{-2}
+            \end{align*}
+
+            Assim, podemos calcular pelo polinômio característico:
+
+            \[
+                P(\lambda) = \det{(\mudabase{T}{\beta}{\beta} - \lambda I_2)} = (\lambda - 1)(\lambda - 2) = 0
+            \]
+
+            Os autovalores são distintos ($\lambda_1 = 1, \lambda_2 = 2$). Oba, então a matriz é diagonizável, já que
+            $\dim{\POL{1}} = 2$ (OBA!)
+
+            Vamos encontrar uma base de autovetores.
+
+            Para $\lambda_1 = 1$, temos:
+            \[
+                V_1 = \left\{ \vetord{1}{-1} \right\} \textit{, i. e., } V_1 = \{1 - x\}
+            \]
+
+            Similarmente, para $\lambda_2 = 2$, temos:
+            \[
+                V_2 = \left\{ \vetord{4}{-3} \right\} \textit{, i. e., } V_2 = \{4 - 3x\}
+            \]
+
+            Portanto, temos a seguinte base de autovetores e a matriz diagonizada:
+
+            \begin{align*}
+                \gamma &= \{ 1 - x, 4 - 3x \}\\
+                \mudabase{T}{\gamma}{\gamma} &= \matriz{1}{0}{0}{2}
+            \end{align*}
+        \end{example}
+\end{document}
