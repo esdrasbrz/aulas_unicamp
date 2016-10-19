@@ -18,4 +18,35 @@
 \begin{document}
     \maketitle
 
+    \section{Cálculo de Massa e Carga}
+        \subsection{Massa}
+            Para o cálculo de massa de uma lâmina que ocupa a região $R$, tendo $\rho(x,y)$, usamos:
+
+            \[
+                m = \doubleint{\rho(x,y)}
+            \]
+
+        \subsection{Carga Elétrica}
+            A carga elétrica total funciona da mesma maneira, sendo $\sigma(x,y)$ a densidade de carga:
+
+            \[
+                Q = \doubleint{\sigma(x,y)}
+            \]
+
+    \section{Momentos e Centro de Massa}
+        \subsection{Momentos}
+            Definimos os momentos como $M_x$ o momento em relação ao eixo $x$ e $M_y$ com relação a $y$:
+
+            \begin{align*}
+                M_x &= \doubleint{y \rho(x,y)}\\
+                M_y &= \doubleint{x \rho(x,y)}\\
+            \end{align*}
+        
+        \subsection{Centro de Massa}
+            Temos as coordenadas do centro de massa $(\bar{x}, \bar{y})$, onde $m$ é a massa do corpo:
+
+            \begin{align*}
+                \bar{x} &= \frac{M_y}{m} = \frac{1}{m} \doubleint{x \rho(x,y)}\\
+                \bar{y} &= \frac{M_x}{m} = \frac{1}{m} \doubleint{y \rho(x,y)}\\
+            \end{align*}
 \end{document}
