@@ -1,0 +1,83 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{graphicx}
+\usepackage{bbm}
+
+\author{Esdras R. Carmo - 170656}
+\title{Integrais Triplas}
+\date{\today}
+
+\newcommand{\REAL}{\mathbbm{R}}
+
+% Comando para integral dupla sobre região R
+\newcommand{\doubleint}[1] {\iint\limits_D #1 dA}
+\newcommand{\tripleint}[1] {\iiint\limits_E #1 dV}
+
+% theorems
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{example}{Exemplo}[section]
+\newtheorem{definition}{Definição}[section]
+
+
+\begin{document}
+    \maketitle
+
+    \section{Definição para caixa retangular}
+        Sendo a caixa $E = [a, b] \times [c, d] \times [r, s]$, i. e.,
+        \[
+            E = \{(x,y,z) \in \REAL^3 \mid a \leq x \leq b, c \leq y \leq d, r \leq z \leq s \}
+        \]
+
+        Temos:
+
+        \begin{align*}
+            \tripleint{f(x,y,z)} &= \int_a^b \int_c^d \int_r^s f(x,y,z) dz dy dx\\
+        \end{align*}
+
+        Sendo possível alterar a ordem de integração.
+
+    \section{Cálculo de volume}
+        Dado um sólido $E$, então temos o seu volume como:
+        \[ V(E) = \tripleint{} \]
+
+    \section{Exemplos}
+        \begin{example}
+            Calcule $\tripleint{z}$, onde $E$ é o tetraedro delimitado por $x = 0$, 
+            $y = 0$, $z = 0$, $x + y + z = 1$.
+
+            Note pelo desenho que a região é:
+            \[
+                E = \{ (x,y,z) \in \REAL^3 \mid (x,y) \in D, 0 \leq z \leq 1 - x - y\}
+            \]
+
+            Assim, temos:
+
+            \begin{align*}
+                \tripleint{z} &= \doubleint{\left[ \int_0^{1-x-y} z dz \right]}\\
+                &= \doubleint{\left[ \frac{z^2}{2} \right]_0^{1-x-y}}\\
+                \tripleint{z} &= \frac{1}{2} \doubleint{(1 - x - y)^2}
+            \end{align*}
+
+            Agora precisamos encontrar a região $D$. Portanto:
+            \[ D = \{(x,y) \in \REAL^2 \mid 0 \leq x \leq 1, 0 \leq y \leq 1 - x \} \]
+
+            Assim, temos:
+
+            \begin{align*}
+                \frac{1}{2} \int_0^1 \int_0^{1 - x} (1 - x - y)^2 dy dx\\
+                \textit{Fazendo }u(y) = 1 - x - y\textit{, temos}\\
+                \frac{1}{2} \int_0^1 \int_{1-x}^0 -u^2 du dx &= \frac{1}{2} \int_0^1 \left[ - \frac{u^3}{3} \right]_{1-x}^0 dx\\
+                &= \frac{1}{6} \int_0^1 (1 - x)^3 dx
+            \end{align*}
+
+            Tomando $v = 1 - x$, temos:
+
+            \begin{align*}
+                \frac{1}{6} \int_1^0 -v^3 dv &= \frac{1}{6} \int_0^1 v^3 dv = \frac{1}{24}\\
+            \end{align*}
+        \end{example}
+\end{document}
