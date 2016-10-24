@@ -1,0 +1,124 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{graphicx}
+\usepackage{bbm}
+
+\author{Esdras R. Carmo - 170656}
+\title{Integrais Triplas em Coordenadas Cilíndricas}
+\date{\today}
+
+\newcommand{\REAL}{\mathbbm{R}}
+
+% Comando para integrais duplas e triplas
+\newcommand{\doubleint}[2] {\iint\limits_{#1} #2}
+\newcommand{\tripleint}[2] {\iiint\limits_{#1} #2}
+
+% theorems
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{example}{Exemplo}[section]
+\newtheorem{definition}{Definição}[section]
+
+
+\begin{document}
+    \maketitle
+
+    \section{Mudança de Coordenadas}
+        Temos a seguinte relação:
+
+        \begin{align*}
+            x &= r \cos\theta\\
+            y &= r \sin\theta\\
+            z &= z\\
+            r^2 &= x^2 + y^2\\
+        \end{align*}
+
+        Ou seja, temos $x$ e $y$ em coordenadas polares e $z$ livre em cartesiana. Essas coordenadas são
+        boas para descrever figuras de revolução.
+
+        \subsection{Exemplos}
+            \begin{example}
+                Descreva a superfície cuja equação em coordenadas cilindricas é
+                $z = r$.
+
+                Temos:
+
+                \begin{align*}
+                    z^2 &= r^2\\
+                    z^2 &= x^2 + y^2
+                \end{align*}
+
+                Ou seja, temos um cone.
+            \end{example}
+
+        \subsection{Integrais Triplas}
+            Se precisamos calcular a integral $\tripleint{E}{f(x,y,z) dV}$ e 
+            \[
+                E = \{(x,y,z) \in \REAL^3 \mid (x,y) \in D, u_1(x,y) \leq z \leq u_2(x,y) \}
+            \]
+            
+            E além disso:
+            \[
+                D = \{(r, \theta) \mid \alpha \leq \theta \leq \beta, h_1(\theta) \leq r \leq h_2(\theta) \}
+            \]
+
+            Então:
+
+            \begin{align*}
+                \tripleint{E}{f(x,y,z) dV} &= \int_\alpha^\beta \int_{h_1(\alpha)}^{h_2(\beta)} \int_{u_1(r,\theta)}^{u_2(r,\theta)} f(r, \theta, z) r dz dr d\theta
+            \end{align*}
+
+    \section{Exemplos}
+        \begin{example}
+            Um sólido $E$ está contido no cilindro $x^2 + y^2 = 1$, abaixo do plano $z = 4$ e acima do paraboloide
+            $z = 1 - x^2 - y^2$. A densidade em qualquer ponto é proporcional à distância do ponto ao eixo do cilindro. Determine
+            a massa de E.
+
+            Lembramos que a massa é:
+            \[
+                m = \tripleint{E}{\rho(x,y,z) dV}
+            \]
+
+            Descrevendo o sólido $E$:
+
+            \begin{align*}
+                E &= \{ (x,y,z) \in \REAL^3 \mid -1 \leq x \leq 1, -\sqrt{1 - x^2} \leq y \leq \sqrt{1 - x^2}, 1 - x^2 - y^2 \leq z \leq 4\}\\
+                E_{r\theta z} &= \{ (r, \theta, z) \mid 0 \leq r \leq 1, 0 \leq \theta \leq 2\pi, 1 - r^2 \leq z \leq 4 \}
+            \end{align*}
+
+            Agora podemos calcular a integral, sabendo que $\rho(r, \theta, z) = kr$:
+
+            \begin{align*}
+                m &= \tripleint{E_{r\theta z}}{\rho(x,y,z) r dz dr d\theta}\\
+                m &= \int_0^{2\pi} \int_0^1 \int_{1 - r^2}^{4} kr^2 dz dr d\theta\\
+                m &= k \int_0^{2\pi} \int_0^1 r^2 (3 + r^2) dr d\theta\\
+                m &= k \int_0^{2\pi} \int_0^1 (3r^2 + r^4) dr d\theta\\
+                m &= k \int_0^{2\pi} \left(1 + \frac{1}{5}\right) d\theta\\
+                m &= \frac{6}{5}k \int_0^{2\pi} d\theta\\
+                m &= \frac{12 k\pi}{5}
+            \end{align*}
+        \end{example}
+
+        \begin{example}
+            Calcule
+            \[
+                \int_{-2}^2 \int_{-\sqrt{4 - x^2}}^{\sqrt{4 - x^2}} \int_{\sqrt{x^2 + y^2}}^2 (x^2 + y^2) dz dy dx
+            \]
+
+            Note que a integral é muito mais fácil de calcular em coordenadas cilíndricas. 
+            De fato, podemos calcular da seguinte forma:
+
+            \begin{align*}
+                I &= \int_0^{2\pi} \int_0^2 \int_r^2 r^2 r dz dr d\theta\\
+                I &= \int_0^{2\pi} \int_0^2 r^3 [z]_r^2 dr d\theta\\
+                I &= \int_0^{2\pi} \int_0^2 (2r^3 - r^4) dr d\theta\\
+                I &= \int_0^{2\pi} \left[ \frac{r^4}{2} - \frac{r^5}{5} \right]_0^2 d\theta\\
+                I &= \int_0^{2\pi} \left( 8 - \frac{32}{5} \right) d\theta\\
+                I &= \left[\frac{8}{5} \theta \right]_0^{2\pi}\\
+                I &= \frac{16\pi}{5}
+            \end{align*}
+        \end{example}
+\end{document}
