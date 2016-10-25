@@ -1,0 +1,100 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{bbm}
+
+\author{Esdras R. Carmo - 170656}
+\title{Produto Interno}
+\date{\today}
+
+% Comando para conjuntos numéricos
+\newcommand{\REAL} {\mathbbm{R}}
+\newcommand{\COMPLEX} {\mathbbm{C}}
+\newcommand{\POL}[1] {\mathbbm{P}_{#1} (\REAL)}
+
+% Comando para a norma
+\newcommand{\norm}[1] {\left.\parallel #1 \right.\parallel}
+
+% Comando para a algebra
+\newcommand{\kernel}[1] {\ker \left( #1 \right)}
+\newcommand{\imagem}[1] {\text{Im} \left( #1 \right)}
+\newcommand{\posto}[1] {\dim{\left( \imagem{#1} \right)}}
+\newcommand{\nul}[1] {\dim{ \left( \kernel{#1} \right) }}
+\newcommand{\deffunc}[3] {#1: #2 \longrightarrow #3}
+\newcommand{\mudabase}[3] {#1_{#2 \leftarrow #3}}
+\newcommand{\vetord}[2] {\begin{pmatrix}#1\\#2\end{pmatrix}} % cria matriz coluna 2 x 1
+\newcommand{\vetort}[3] {\begin{pmatrix}#1\\#2\\#3\end{pmatrix}} % cria matriz coluna 3 x 1
+\newcommand{\matriz}[4] {\begin{pmatrix}#1&#2\\#3&#4\end{pmatrix}}
+\newcommand{\interno}[0] {<\cdot, \cdot>}
+
+% theorems
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{example}{Exemplo}[section]
+\newtheorem{definition}{Definição}[section]
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+\begin{document}
+    \maketitle
+
+    \section{Teoria}
+        Se $\interno$ é produto interno sobre $V$ com $dim < \infty$, então:
+        \[
+            <u, v> = Y^t A X
+        \]
+
+        Onde:
+
+        \begin{align*}
+            X &= [u]_\beta\\
+            Y &= [v]_\beta\\
+            A &= (<v_j, v_i>) = (a_{ij})
+        \end{align*}
+
+    \section{Exemplo}
+        Se $V = \POL{2}$ e $\beta = \{1, x, x^2\}$ definimos
+        \[
+            <p(x), q(x)> = \int_{-1}^1 p(x)q(x) dx
+        \]
+        O produto interno.
+
+        Calculemos a matriz $A$ de $\interno$ com relação a $\beta$.
+
+        \begin{align*}
+            a_{11} &= \int_{-1}^1 v_1 v_1 dx = \int_{-1}^1 1 dx = 2\\
+            a_{12} &= \int_{-1}^1 v_2 v_1 dx = \int_{-1}^1 x dx = 0 = a_{21}\\
+            a_{22} &= \int_{-1}^1 v_2 v_2 dx = \int_{-1}^1 x^2 dx = \frac{2}{3}\\
+            a_{23} &= \int_{-1}^1 v_3 v_2 dx = \int_{-1}^1 x^3 dx = 0 = a_{32}\\
+            a_{33} &= \int_{-1}^1 v_3 v_3 dx = \int_{-1}^1 x^4 dx = \frac{2}{5}\\
+            a_{13} &= \int_{-1}^1 v_3 v_1 dx = \int_{-1}^1 x^2 dx = \frac{2}{3} = a_{31}\\
+        \end{align*}
+
+        Portanto,
+
+        \begin{align*}
+            A &= 
+            \begin{pmatrix}
+                2 & 0 & \frac{2}{3}\\
+                0 & \frac{2}{3} & 0\\
+                \frac{2}{3} & 0 & \frac{2}{5}
+            \end{pmatrix}
+        \end{align*}
+
+        Assim o teorema fala:
+
+        \begin{align*}
+            <a + bx + cx^2, d + ex + fx^2> &= \begin{pmatrix}d&e&f\end{pmatrix} \cdot 
+            \begin{pmatrix}
+                2 & 0 & \frac{2}{3}\\
+                0 & \frac{2}{3} & 0\\
+                \frac{2}{3} & 0 & \frac{2}{5}
+            \end{pmatrix}
+            \cdot
+            \begin{pmatrix}
+                a\\b\\c
+            \end{pmatrix}
+        \end{align*}
+\end{document}
