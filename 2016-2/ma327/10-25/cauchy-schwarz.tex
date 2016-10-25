@@ -1,0 +1,60 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{bbm}
+
+\author{Esdras R. Carmo - 170656}
+\title{Desigualdade de Cauchy-Schwarz}
+\date{\today}
+
+% Comando para conjuntos numéricos
+\newcommand{\REAL} {\mathbbm{R}}
+\newcommand{\COMPLEX} {\mathbbm{C}}
+\newcommand{\POL}[1] {\mathbbm{P}_{#1} (\REAL)}
+
+% Comando para a norma
+\newcommand{\norm}[1] {\left.\parallel #1 \right.\parallel}
+
+% Comando para a algebra
+\newcommand{\kernel}[1] {\ker \left( #1 \right)}
+\newcommand{\imagem}[1] {\text{Im} \left( #1 \right)}
+\newcommand{\posto}[1] {\dim{\left( \imagem{#1} \right)}}
+\newcommand{\nul}[1] {\dim{ \left( \kernel{#1} \right) }}
+\newcommand{\deffunc}[3] {#1: #2 \longrightarrow #3}
+\newcommand{\mudabase}[3] {#1_{#2 \leftarrow #3}}
+\newcommand{\vetord}[2] {\begin{pmatrix}#1\\#2\end{pmatrix}} % cria matriz coluna 2 x 1
+\newcommand{\vetort}[3] {\begin{pmatrix}#1\\#2\\#3\end{pmatrix}} % cria matriz coluna 3 x 1
+\newcommand{\matriz}[4] {\begin{pmatrix}#1&#2\\#3&#4\end{pmatrix}}
+\newcommand{\interno}[0] {<\cdot, \cdot>}
+
+% theorems
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{example}{Exemplo}[section]
+\newtheorem{definition}{Definição}[section]
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+\begin{document}
+    \maketitle
+
+    \section{Enunciados}
+        \subsection{$\REAL$-espaço}
+            Se $V$ um $\REAL$-espaço com $\interno$, então $\forall u, v \in V$ temos que 
+            \[
+                <u,v>^2 \leq <u,u> \cdot <v,v>
+            \]
+
+            Além disso, se torna igualdade $\Leftrightarrow$ $u$ e $v$ são L. D. $\Leftrightarrow$
+            $u$ e $v$ são paralelos.
+
+        \subsection{$\COMPLEX$-espaço}
+            Se $V$ um $\COMPLEX$-espaço com $\interno$, então $\forall u, v \in V$ temos que 
+            \[
+                \mid<u,v>\mid^2 \leq <u,u> \cdot <v,v>
+            \]
+    
+            Temos o mesmo resultado para o espaço $\REAL$.
+\end{document}
