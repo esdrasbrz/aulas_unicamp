@@ -1,0 +1,140 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{graphicx}
+\usepackage{bbm}
+
+\author{Esdras R. Carmo - 170656}
+\title{Integrais Triplas em Coordenadas Esféricas}
+\date{\today}
+
+\newcommand{\REAL}{\mathbbm{R}}
+
+% Comando para integrais duplas e triplas
+\newcommand{\doubleint}[2] {\iint\limits_{#1} #2}
+\newcommand{\tripleint}[2] {\iiint\limits_{#1} #2}
+
+% theorems
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{example}{Exemplo}[section]
+\newtheorem{definition}{Definição}[section]
+
+
+\begin{document}
+    \maketitle
+
+    \section{Mudança de Coordenadas}
+        \paragraph{}
+        Dado um ponto $P$ com coordenadas $(x, y, z)$ no sistema cartesiano, ele pode ser representado
+        da seguinte forma em coordenadas esféricas $(\rho, \theta, \phi)$:
+
+        \begin{align*}
+            \rho &= \sqrt{x^2 + y^2 + z^2}\\
+            \theta &= \arctan \frac{y}{x}\\
+            z &= \rho \cos \phi\\
+            x &= \rho \sin \phi \cos \theta\\
+            y &= \rho \sin \phi \sin \theta\\
+        \end{align*}
+
+        Onde $\rho \geq 0$ e $0 \leq \phi \leq \pi$.
+
+
+        \subsection{Exemplo de Sólidos}
+            \subsubsection{Cunha Esférica}
+                Uma cunha esférica é dada por:
+                \[
+                    E = \{ (\rho, \theta, \phi) \mid a \leq \rho \leq b, \alpha \leq \pi, c \leq \phi \leq d \}
+                \]
+                em que $0 \leq a, \beta - \alpha \leq 2\pi, 0 \leq c$ e $d \leq \pi$.
+
+                Olhando esse sólido em um sistema de coordenadas esféricas daria uma caixa, e no sistema cartesiano
+                justamente uma cunha esférica.
+
+        \subsection{Integral}
+            Para a mudança de variável na integral temos que multiplicar o integrando por $\rho^2 \sin \phi$.
+
+    \section{Exemplos}
+        \begin{example}
+            Calcule
+            \[
+                I = \tripleint{B} e^{(x^2 + y^2 + z^2)^{3/2}} dV
+            \]
+            em que B é a bola unitária
+            \[
+                B = \{ (x,y,z) \mid x^2 + y^2 + z^2 \leq 1 \}
+            \]
+
+            Em coordenadas esféricas temos
+
+            \begin{align*}
+                B &= \{ (\rho, \theta, \phi) \mid 0 \leq \rho \leq 1, 0 \leq \theta \leq 2\pi, 0 \leq \phi \leq \pi \}\\
+                I &= \int_0^\pi \int_0^{2\pi} \int_0^1 e^{\rho^3} \rho^2 \sin \phi d\rho d\theta d\phi\\
+            \end{align*}
+
+            Tomando $u = \rho^3$, temos $du = 3 \rho^2 d\rho$. Logo,
+
+            \begin{align*}
+                I &= \int_0^\pi \int_0^{2\pi} \int_0^1 \frac{1}{3} e^u \sin\phi du d\theta d\phi\\
+                I &= \frac{1}{3} \int_0^\pi \int_0^{2\pi} (e - 1) \sin\phi d\theta d\phi\\
+                I &= \frac{e - 1}{3} \int_0^\pi \sin\phi d\phi\\
+                I &= \frac{4}{3} \pi (e - 1)\\
+            \end{align*}
+        \end{example}
+
+        \begin{example}
+            Utilize coordenadas esféricas para determinar o volume do sólido delimitado abaixo pelo cone
+            $z = \sqrt{x^2 + y^2}$ e acima pela esfera $x^2 + y^2 + z^2 = z$.
+
+            Note que, temos a seguinte esfera:
+
+            \begin{align*}
+                x^2 + y^2 + z^2 - z + \frac{1}{4} &= \frac{1}{4}\\
+                x^2 + y^2 + \left( z - \frac{1}{2} \right)^2 &= \left(\frac{1}{2}\right)^2
+            \end{align*}
+
+            Ou seja, uma esfera de raio $\frac{1}{2}$ centrada no ponto $\left( 0, 0, \frac{1}{2} \right)$.
+
+            Note que o cone possui exatamente o raio da esfera para $z = \frac{1}{2}$ que é quando os dois 
+            sólidos se encontram.
+
+            Vamos descrever a esfera:
+
+            \begin{align*}
+                x^2 + y^2 + z^2 &= z\\
+                \rho^2 &= \rho \cos \phi \textit{ , considerando }\rho \geq 0\\
+                \rho &= \cos \phi\\
+            \end{align*}
+
+            Descrevendo o cone:
+
+            \begin{align*}
+                z &= \sqrt{x^2 + y^2}\\
+                \rho \cos \phi &= \rho \sin \phi\\
+                \cos \phi &= \sin \phi \Rightarrow \phi = \frac{\pi}{4}\\
+            \end{align*}
+
+            Portanto a região que temos é:
+            \[
+                E = \left\{ (\rho, \theta, \phi) \mid 0 \leq \rho \leq \cos \phi, 0 \leq \phi \leq \frac{\pi}{4}, 0 \leq \theta \leq 2\pi \right\}
+            \]
+
+            Então podemos calcular a integral:
+
+            \begin{align*}
+                V &= \tripleint{E}{dV}\\
+                V &= \int_0^{2\pi} \int_0^{\frac{\pi}{4}} \int_0^{\cos \phi} \rho^2 \sin \phi d\rho d\phi d\theta\\
+                V &= \frac{1}{3} \int_0^{2\pi} \int_0^{\frac{\pi}{4}} \cos^3 \phi \sin \phi d\phi d\theta\\
+            \end{align*}
+
+            Tomando $u = \cos \phi$, temos $du = -\sin\phi d\phi$. Logo,
+
+            \begin{align*}
+                V &= -\frac{1}{3} \int_0^{2\pi} \int_0^{\frac{\sqrt{2}}{2}} u^3 du d\theta\\
+                V &= -\frac{1}{12} \int_0^{2\pi} \left( \frac{1}{4} - 1 \right) d\theta\\
+                V &= \frac{\pi}{8}
+            \end{align*}
+        \end{example}
+\end{document}
