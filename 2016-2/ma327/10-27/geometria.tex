@@ -1,0 +1,103 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{bbm}
+
+\author{Esdras R. Carmo - 170656}
+\title{Geometria com Produto Interno}
+\date{\today}
+
+% Comando para conjuntos numéricos
+\newcommand{\REAL} {\mathbbm{R}}
+\newcommand{\COMPLEX} {\mathbbm{C}}
+\newcommand{\POL}[1] {\mathbbm{P}_{#1} (\REAL)}
+
+% Comando para a norma
+\newcommand{\norm}[1] {\left.\parallel #1 \right.\parallel}
+
+% Comando para a algebra
+\newcommand{\kernel}[1] {\ker \left( #1 \right)}
+\newcommand{\imagem}[1] {\text{Im} \left( #1 \right)}
+\newcommand{\posto}[1] {\dim{\left( \imagem{#1} \right)}}
+\newcommand{\nul}[1] {\dim{ \left( \kernel{#1} \right) }}
+\newcommand{\deffunc}[3] {#1: #2 \longrightarrow #3}
+\newcommand{\mudabase}[3] {#1_{#2 \leftarrow #3}}
+\newcommand{\vetord}[2] {\begin{pmatrix}#1\\#2\end{pmatrix}} % cria matriz coluna 2 x 1
+\newcommand{\vetort}[3] {\begin{pmatrix}#1\\#2\\#3\end{pmatrix}} % cria matriz coluna 3 x 1
+\newcommand{\matriz}[4] {\begin{pmatrix}#1&#2\\#3&#4\end{pmatrix}}
+\newcommand{\interno}[0] {<\cdot, \cdot>}
+
+% theorems
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{example}{Exemplo}[section]
+\newtheorem{definition}{Definição}[section]
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+\begin{document}
+    \maketitle
+
+    \section{Norma e Distância}
+        Se $V$ tem $\interno$ produto interno, então:
+
+        \begin{itemize}
+            \item $V$ também tem $\norm{.} = \sqrt{\interno}$ comprimento;
+            \item $V$ tem uma distância $d(u,v) = \norm{v - u}$.
+        \end{itemize}
+
+        \begin{example}
+            Sendo $V = \POL{2}$ com produto interno:
+            \[
+                <f(x), g(x)> := \int_0^1 f(x) g(x) dx
+            \]
+
+            se $f(x) = 3 + 2x$, $g(x) = x^2$.
+
+            \begin{align*}
+                <f(x), g(x)> &= \int_0^1 (3 + 2x)x^2 dx = \frac{3}{2}\\
+                \norm{f(x)} &= \sqrt{<f(x), f(x)>} = \sqrt{\int_0^1 (3 + 2x)^2 dx} = \frac{9}{\sqrt{3}}
+            \end{align*}
+        \end{example}
+
+    \section{Ângulo}
+        Por Cauchy-Schwarz temos:
+
+        \begin{align*}
+            <u,v>^2 &\leq <u,u> <v,v> \Rightarrow \frac{<u,v>^2}{<u,u> <v,v>} \leq 1\\
+            -1 &\leq \frac{<u,v>}{\sqrt{<u,u>} \sqrt{<v,v>}} \leq 1\\
+            -1 &\leq \frac{<u,v>}{\norm{u} \norm{v}} \leq 1\\
+        \end{align*}
+
+        Portanto definimos:
+
+        \begin{align*}
+            \cos \theta &= \frac{<u,v>}{\norm{u} \norm{v}}
+        \end{align*}
+
+        Para $\theta \in [0, \pi]$.
+
+    \section{Ortoganalidade}
+        Se $V$ $F$-espaço com $\interno$. Os vetores $u, v \in V$ são ortogonais se, e somente se,
+        $<u, v> = 0$, ou seja, $\theta = \frac{\pi}{2}$.
+
+        \subsection{Base Ortogonal}
+            Se $V$ um espaço com $\interno$ e $\dim V < \infty$ uma base $\beta$.
+            
+            \begin{enumerate}
+                \item \textbf{Ortogonal} se $\beta$ é conjunto ortogonal, ou seja, todos os vetores de $\beta$
+                    são ortogonais entre si;
+                \item \textbf{Ortonormal} se $\beta$ é conjunto ortonormal, ou seja, além de ortogonais, os vetores
+                    são unitários (norma = $1$).
+            \end{enumerate}
+
+            \paragraph{} Se tivermos base ortogonal, é muito simples escrever um vetor nessa base, pois teremos uma fórmula
+            para dar os coeficientes da seguinte forma. Para todo $v \in V$, então:
+            \[
+                \alpha_i = \frac{<v, q_i>}{<q_i, q_i>}
+            \]
+
+            onde $q_i$ é o vetor $i$ da base $beta$.
+\end{document}
