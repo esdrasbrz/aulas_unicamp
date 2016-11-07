@@ -1,0 +1,152 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{graphicx}
+\usepackage{bbm}
+
+\author{Esdras R. Carmo - 170656}
+\title{Integrais de Linha}
+\date{\today}
+
+\newcommand{\REAL}{\mathbbm{R}}
+
+% Comando para integrais duplas e triplas
+\newcommand{\doubleint}[2] {\iint\limits_{#1} #2}
+\newcommand{\tripleint}[2] {\iiint\limits_{#1} #2}
+
+% Comando para a norma
+\newcommand{\norm}[1] {\left.\parallel #1 \right.\parallel}
+
+% theorems
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{example}{Exemplo}[section]
+\newtheorem{definition}{Definição}[section]
+
+
+\begin{document}
+    \maketitle
+
+    \section{Curvas}
+        Descrevemos uma curva $C$ através do parâmetro $t$ da seguinte forma:
+
+        \begin{align*}
+            x &= x(t)\\
+            y &= y(t)\\
+            a &\leq t \leq b
+        \end{align*}
+
+        Ou ainda, através da equação vetorial:
+
+        \begin{align*}
+            r(t) &= x(t)i + y(t)j = (x(t), y(t))
+        \end{align*}
+
+        Além disso, consideramos $C$ curva lisa se $r^\prime (t) = (x^\prime (t), y^\prime (t))$ é contínua.
+
+    \section{Integral de Linha}
+        Se $f$ uma função de duas variáveis sobre uma curva lisa $C$, então a integral de linha de $f$ sobre $C$ é:
+
+        \begin{align*}
+            \int_C f(x,y) ds &= \lim_{n \to \infty} \sum_{i = 1}^{n} f(\bar{x_i}, \bar{y_i}) \Delta s_i
+        \end{align*}
+
+        Sendo $\Delta s_i \approx \norm{r^\prime_i (t_i) } \Delta t$, temos:
+
+        \begin{align*}
+            \int_C f(x,y) ds &= \int_a^b f(r(t)) \norm{r^\prime(t)} dt
+        \end{align*}
+
+        \subsection{Comprimento de Arco}
+            Podemos ainda calcular o comprimento da curva $C$ da seguinte forma:
+            \[
+                \int_C 1 ds = \int_a^b \norm{r^\prime(t)} dt
+            \]
+
+        \subsection{Curvas lisas por partes}
+            $C$ é uma curva lisa por partes se for união de curvas lisas $C_1, \dots, C_n$. Assim,
+            podemos fazer a integral de linha sobre $C$:
+            \[
+                \int_C f(x,y) ds = \int_{C_1} f(x,y) ds + \dots + \int_{C_n} f(x,y) ds
+            \]
+
+    \section{Exemplos}
+        \begin{example}
+            Calcule $\int_C (2 + x^2 y) ds$, em que $C$ é a metade superior do círculo unitário $x^2 + y^2 = 1$.
+
+            Em coordenadas polares, temos:
+
+            \begin{align*}
+                x(t) &= \cos t\\
+                y(t) &= \sin t\\
+                0 &\leq t \leq \pi\\
+                r(t) &= (\cos t, \sin t)\\
+                r^\prime(t) &= (-\sin t, \cos t)
+            \end{align*}
+
+            Assim, temos a integral $I$:
+
+            \begin{align*}
+                I &= \int_C f(x,y) ds\\
+                &= \int_0^\pi f(\cos t, \sin t) \norm{(-\sin t, \cos t)} dt\\
+                &= \int_0^\pi (2 + \cos^2 t \sin t) \cdot \sqrt{\sin^2 t + \cos^2 t} dt\\
+                &= [2t]_0^\pi + \int_0^\pi \cos^2 t \sin t dt
+            \end{align*}
+
+            Tomando $u = \cos t$, $du = -\sin t dt$, temos:
+
+            \begin{align*}
+                I &= 2\pi - \int_1^{-1} u^2 du\\
+                I &= 2\pi - \left[ \frac{u^3}{3} \right]_1^{-1}\\
+                I &= 2\pi + \frac{2}{3}
+            \end{align*}
+        \end{example}
+
+        \begin{example}
+            Calcule $\int_C 2x ds$, em que $C$ é formada pelo arco $C_1$ da parábola $y = x^2$ de
+            $(0, 0)$ a $(1, 1)$, seguido pelo segmento de reta vertical $C_2$ de $(1, 1)$ a $(1, 2)$.
+
+            Sabemos que, como $C$ é lisa por partes, temos:
+            
+            \begin{align*}
+                I &= \int_C f(x,y) ds\\
+                I_1 &= \int_{C_1} f(x,y) ds\\
+                I_2 &= \int_{C_2} f(x,y) ds\\
+                I &= I_1 + I_2
+            \end{align*}
+
+            Sobre a curva $C_1$, temos:
+
+            \begin{align*}
+                r_1(t) &= (t, t^2) \textit{, para } 0 \leq t \leq 1\\
+                r_1^\prime(t) &= (1, 2t)\\
+                I_1 &= \int_0^1 2t \norm{(1, 2t)} dt\\
+                I_1 &= \int_0^1 2t \sqrt{1 + 4t^2} dt
+            \end{align*}
+
+            Tome $u = 1 + 4t^2$, $du = 8t dt$, temos:
+            
+            \begin{align*}
+                I_1 &= \frac{1}{4} \int_1^5 \sqrt{u} du\\
+                I_1 &= \frac{1}{6} \left[ u^{3/2} \right]_1^5\\
+                I_1 &= \frac{1}{6} (5 \sqrt{5} - 1)
+            \end{align*}
+
+            Sobre a curva $C_2$, temos:
+
+            \begin{align*}
+                r_2 (t) &= (1, t) \textit{, para } 1 \leq t \leq 2\\
+                r_2^\prime (t) &= (0, 1)\\
+                I_2 &= \int_1^2 2 \norm{(0, 1)} dt\\
+                I_2 &= 2
+            \end{align*}
+
+            Assim, concluimos que:
+
+            \begin{align*}
+                \int_C 2x ds &= \frac{1}{6} (5 \sqrt{5} - 1) + 2
+            \end{align*}
+        \end{example}
+\end{document}
