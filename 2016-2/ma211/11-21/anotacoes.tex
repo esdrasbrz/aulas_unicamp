@@ -1,0 +1,257 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{graphicx}
+\usepackage{bbm}
+
+\author{Esdras R. Carmo - 170656}
+\title{Teorema Fundamental das Integrais de Linhas}
+\date{\today}
+
+\newcommand{\REAL}{\mathbbm{R}}
+
+% Comando para integrais duplas e triplas
+\newcommand{\doubleint}[2] {\iint\limits_{#1} #2}
+\newcommand{\tripleint}[2] {\iiint\limits_{#1} #2}
+
+% Comando para a norma
+\newcommand{\norm}[1] {\left.\parallel #1 \right.\parallel}
+\newcommand{\PartialDer}[2] {\frac{\partial #1}{\partial #2}}
+
+% theorems
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{example}{Exemplo}[section]
+\newtheorem{definition}{Definição}[section]
+
+
+\begin{document}
+    \maketitle
+
+    \section{Teorema para Integrais de Linha}
+        Seja $C$ uma curva lisa descrita por $r(t)$, $a \leq t \leq b$. Se $f$ uma função
+        diferenciável de duas ou três variáveis cujo vetor gradiente $\nabla f$ é contínuo em
+        $C$. Então:
+        \[
+            \int_C \nabla f \cdot dr = f(r(b)) - f(r(a))
+        \]
+
+        Análogo ao teorema fundamental do cálculo, sendo que o gradiente faz o papel da derivada.
+
+        \subsection{Campo vetorial conservativo}
+            Se o campo vetorial for gradiente de uma função, então é dito campo conservativo. Portanto,
+            para esse caso, podemos calcular a integral conhecendo apenas o valor de $f$ nas extremidades
+            da curva $C$, se considerarmos o campo $F$:
+            \[
+                F = \nabla f
+            \]
+
+        \subsection{Exemplo}
+            \begin{example}
+                Determine o trabalho realizado pelo campo gravitacional:
+                \[
+                    F(x) = - \frac{mMG}{\norm{x}^3} x
+                \]
+
+                ao mover uma particula de massa $m$ do ponto $(3, 4, 12)$ para o ponto $(2, 2, 0)$ ao longo
+                de uma linha reta.
+
+                Note que o trabalho é dado por:
+                \[
+                    W = \int_C F \cdot dr
+                \]
+
+                Sabemos que o campo gravitacional é conservativo, i. e.:
+                \[
+                    F = \nabla f
+                \]
+
+                onde:
+                \[
+                    f(x, y, z) = \frac{mMG}{\sqrt{x^2 + y^2 + z^2}}
+                \]
+
+                Portanto, temos a seguinte integral, que pode ser resolvida pelo teorema fundamental das integrais de linha:
+                \begin{align*}
+                    W &= \int_C \nabla f \cdot dr\\
+                    W &= f(2, 2, 0) - f(3, 4, 12)\\
+                    W &= \frac{mMG}{\sqrt{8}} - \frac{mMG}{13}\\
+                    W &= mMG \left(\frac{1}{2\sqrt{2}} - \frac{1}{13}\right)
+                \end{align*}
+            \end{example}
+
+    \section{Independência do Caminho}
+        Dizemos que a integral de linha é independente do caminho se a integral sobre $C_1$ é igual à integral sobre
+        $C_2$ para quaisquer $C_1$ e $C_2$ que possuam os mesmos pontos iniciais e finais.
+
+        Note que a integral de linha de um campo vetorial conservativo $F = \nabla f$ é independente do caminho, pois
+        pelo teorema fundamental das integrais de linha, essa integral só irá depender do ponto inicial e final aplicados em $f$.
+
+    \section{Curva Fechada}
+        Uma curva é fechada se o ponto final e inicial são equivalentes, i. e., $r(b) = r(a)$.
+
+        \begin{theorem}
+            A integral de linha $\int_C F \cdot dr$ é independente do caminho em $D$ se e somente se $\int_C F \cdot dr = 0$
+            para toda curva fechada $C$.
+        \end{theorem}
+
+    \section{Determinando se $F$ é um campo vetorial conservativo}
+        \label{sec:conservativo}
+        Teoricamente, se a integral de linha é $0$ para qualquer curva fechada $C$, então $F$ é um campo vetorial conservativo.
+        No entanto, esse teorema não nos ajuda na prática.
+
+        Supondo que
+        \[
+            F(x,y) = P(x,y) i + Q(x,y) j
+        \]
+        é um campo vetorial conservativo, então existe $f$ tal que $F = \nabla f$, portanto,
+        \begin{align*}
+            P &= \PartialDer{f}{x}\\
+            Q &= \PartialDer{f}{y}
+        \end{align*}
+
+        Pelo teorema de Clairaut, então:
+        \[
+            \PartialDer{P}{y} = \PartialDer{Q}{x}
+        \]
+
+        Assim, caso essa igualdade não for válida, então o campo vetorial não é conservativo.
+
+    \section{Tipos de Região}
+        \subsection{Curva Simples}
+            Uma curva é dita simples se ela não se autointercepta em nenhum ponto entre as extremidades, excluindo os extremos.
+            Podemos ter uma curva simples e fechada, por exemplo.
+
+        \subsection{Região Simplesmente Conexa}
+            Uma região $D$ é simplesmente conexa se toda curva simples fechada em $D$ contorna somente pontos que estão em
+            $D$. Em outras palavras, a região não pode ter buracos. E também não é constituída por pedaços separados.
+
+    \section{Recíproca do Teorema da Seção~\ref{sec:conservativo}}
+        \label{sec:reciproca}
+        Se $F = P i + Q j$ um campo vetorial sobre uma região $D$ aberta e simplesmente conexa. Se $P$ e $Q$ possuem derivadas
+        parciais de primeira ordem contínuas e
+        \[
+            \PartialDer{P}{y} = \PartialDer{Q}{x}
+        \]
+        então $F$ é um campo vetorial conservativo.
+
+    \section{Exemplos}
+        \begin{example}
+            Determine se o campo vetorial
+            \[
+                F(x,y) = (x - y)i + (x - 2)j
+            \]
+            é ou não conservativo.
+
+            Como não especifica a região $D$, então está considerando todo o plano $xy$. Portanto, é uma região simplesmente
+            conexa e podemos aplicar a recíproca apresentada na Seção~\ref{sec:reciproca}.
+
+            Considerando:
+            \begin{align*}
+                P(x,y) &= x - y\\
+                Q(x,y) &= x - 2
+            \end{align*}
+
+            Temos as derivadas:
+            \begin{align*}
+                \PartialDer{P}{y} &= -1\\
+                \PartialDer{Q}{x} &= 1\\
+                \PartialDer{P}{y} &\neq \PartialDer{Q}{x}
+            \end{align*}
+
+            Portanto o campo vetorial $F$ não é conservativo.
+        \end{example}
+
+        \begin{example}
+            \label{ex:conservativo}
+            Determine se o campo vetorial
+            \[
+                F(x,y) = (3 + 2xy) i + (x^2 - 3y^2) j
+            \]
+            é ou não conservativo.
+
+            Consideremos
+            \begin{align*}
+                P(x,y) &= 3 + 2xy\\
+                Q(x,y) &= x^2 - 3y^2
+            \end{align*}
+
+            Assim, temos as derivadas:
+            \begin{align*}
+                \PartialDer{P}{y} &= 2x\\
+                \PartialDer{Q}{x} &= 2x\\
+                \PartialDer{P}{y} &= \PartialDer{Q}{x}
+            \end{align*}
+
+            Logo, pela Seção~\ref{sec:reciproca}, o campo vetorial $F$ é conservativo.
+        \end{example}
+
+        \begin{example}
+            \textbf{a)} Se $F(x,y) = (3 + 2xy) i + (x^2 - 3y^2) j$, determine uma função $f$ tal que
+            $F = \nabla f$.
+        
+            Como já sabemos que $F$ é um campo vetorial conservativo pelo Exemplo~\ref{ex:conservativo}, então
+            temos:
+            \begin{align*}
+                \nabla f &= \PartialDer{f}{x}i + \PartialDer{f}{y}j = P(x,y) i + Q(x,y) j\\
+                \PartialDer{f}{x} &= 3 + 2xy\\
+                f(x,y) &= \int (3 + 2xy) dx = 3x + x^2y + g(y)\\
+                \PartialDer{f}{y} &= x^2 + g^\prime (y) = x^2 - 3y^2\\
+                g^\prime (y) &= -3y^2\\
+                g(y) &= - \int 3y^2 dy = -y^3 + K\\
+            \end{align*}
+
+            Logo, a função que estávamos procurando:
+            \[
+                f(x,y) = 3x + x^2y -y^3 + K
+            \]
+            onde $K$ é uma constante real.
+
+            \textbf{b)} Calcule a integral de linha $\int_C F \cdot dr$, em que $C$ é a curva dada por
+            \[
+                r(t) = e^t \sin t \textbf{i} + e^t \cos t \textbf{j}
+            \]
+            com $0 \leq t \leq \pi$.
+
+            Pelo teorema fundamental das integrais de linha, então
+            \[
+                \int_C F \cdot dr = f(r(\pi)) - f(r(0))
+            \]
+
+            Logo:
+            \begin{align*}
+                \int_C F \cdot dr &= f(0, -e^\pi) - f(0, 1)\\
+                &= -\left(-e^\pi\right)^3 + K - (-1^3 + K)\\
+                \int_C F \cdot dr &= e^{3\pi} + 1
+            \end{align*}
+        \end{example}
+
+        \begin{example}
+            Se
+            \[
+                F(x, y, z) = y^2 \textbf{i} + (2xy + e^{3z}) \textbf{j} + 3ye^{3z} \textbf{k}
+            \]
+            é um campo vetorial conservativo, determine $f$ função potencial.
+
+            Temos as seguintes relações entre $f$ e $F$:
+            \begin{align*}
+                \PartialDer{f}{x} &= y^2\\
+                \PartialDer{f}{y} &= 2xy + e^{3z}\\
+                \PartialDer{f}{z} &= 3ye^{3z}
+            \end{align*}
+
+            Temos que:
+            \begin{align*}
+                f(x, y, z) &= \int y^2 dx = xy^2 + g(y, z)\\
+                \PartialDer{f}{y} &= 2xy + g_y (y, z) = 2xy + e^{3z}\\
+                g (y, z) &= \int e^{3z} dy = ye^{3z} + h(z)\\
+                f(x, y, z) &= xy^2 + ye^{3z} + h(z)\\
+                \PartialDer{f}{z} &= 3ye^{3z} + h^\prime(z) = 3ye^{3z}\\
+                h^\prime(z) &= 0\\
+                h(z) &= K \in \REAL\\
+                f(x, y, z) &= xy^2 + ye^{3z} + K\\
+            \end{align*}
+        \end{example}
+\end{document}
