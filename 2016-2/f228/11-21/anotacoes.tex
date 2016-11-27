@@ -1,0 +1,64 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{bbm}
+
+\author{Esdras R. Carmo - 170656}
+\title{Revisão básica Teoria Cinética}
+\date{\today}
+
+\begin{document}
+    \maketitle
+
+    \section{Fórmulas}
+        \begin{enumerate}
+        \item
+            Lei dos gases:
+            \begin{align*}
+                p V &= nRT\\
+                R &= 8,31 Jmol^{-1}K^{-1}
+            \end{align*}
+
+        \item
+            Razão entre os calores específicos:
+            \begin{align*}
+                \gamma &= \frac{C_P}{C_V} = \frac{f + 2}{f}\\
+                C_P &= C_V + R\\
+                C_V &= \frac{f}{2} R
+            \end{align*}
+
+        \item
+            Gases monoatômicos $f = 3$ graus de translação
+        \item
+            Gases diatômicos $f = 5$, com $3$ translação e $2$ rotação. As vezes pode-se
+            considerar mais $2$ de vibração, então $f = 7$.
+        \item
+            Primeira Lei:
+            \[
+                Q = W + \Delta E_{int}
+            \]
+        \end{enumerate}
+
+    \section{Processos Termodinâmicos básicos}
+        \begin{table}[h!]
+            \centering
+            \caption{Tabela de Processos Termodinâmicos}
+
+            \begin{tabular}{|l|l|l|l|l|}
+                \hline
+                Processo & Conceito & $\Delta E$ & $\Delta Q$ & W \\
+                \hline
+                Isobárico & $P \equiv cte$ & $n C_V \Delta T$ & $n C_P \Delta T$ & $P \Delta V$\\
+                \hline
+                Isocórico & $V \equiv cte$ & $n C_V \Delta T$ & $n C_V \Delta T$ & $0$ \\
+                \hline
+                Isotérmico & $T \equiv cte$ & $0$ & $n R T \ln \left( \frac{V_f}{V_i} \right)$ & $ n R T \ln \left( \frac{V_f}{V_i} \right)$ \\
+                \hline
+                Adiabático & $PV^\gamma \equiv cte$ & $\Delta E = -W$ & $0$ & $W = \int P dV$\\
+                \hline
+            \end{tabular}
+        \end{table}
+\end{document}
