@@ -1,0 +1,214 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{graphicx}
+\usepackage{bbm}
+
+\author{Esdras R. Carmo - 170656}
+\title{Rotacional e Divergente}
+\date{\today}
+
+\newcommand{\REAL}{\mathbbm{R}}
+
+% Comando para integrais duplas e triplas
+\newcommand{\doubleint}[2] {\iint\limits_{#1} #2}
+\newcommand{\tripleint}[2] {\iiint\limits_{#1} #2}
+
+% Comando para a norma
+\newcommand{\norm}[1] {\left.\parallel #1 \right.\parallel}
+\newcommand{\PartialDer}[2] {\frac{\partial #1}{\partial #2}}
+
+% Comando para os campos vetoriais
+\newcommand{\FVett}[3] {\left(#1\right) \textbf{i} + \left(#2\right) \textbf{j} + \left(#3\right) \textbf {k}}
+\newcommand{\FVetd}[2] {\left(#1\right) \textbf{i} + \left(#2\right) \textbf{j}}
+
+% Rotacional e Divergente
+\newcommand{\Rot}[0] {\textit{rot }}
+\newcommand{\Div}[0] {\textit{div }}
+
+% theorems
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{example}{Exemplo}[section]
+\newtheorem{definition}{Definição}[section]
+
+
+\begin{document}
+    \maketitle
+
+    \section{Introdução}
+        As operações de rotacional e divergente são escritos com respeito ao operador
+        $\nabla$ dado como:
+        \[
+            \nabla = \left(\PartialDer{}{x}, \PartialDer{}{y}, \PartialDer{}{z}\right)
+        \]
+
+        Assim, operamos da seguinte forma:
+        \[
+            \nabla f = \left(\PartialDer{f}{x}, \PartialDer{f}{y}, \PartialDer{f}{z}\right)
+        \]
+
+    \section{Definições}
+        \subsection{Rotacional}
+            Se $F = \FVett{P}{Q}{R}$ é um campo vetorial em $\REAL^3$, então o rotacional de $F$, denotado
+            por $\Rot F$.
+            \[
+                \Rot F = \nabla \times F
+            \]
+
+            Em outras palavras:
+            \begin{align*}
+                \Rot F &= \nabla \times F = \left(\PartialDer{f}{x}, \PartialDer{f}{y}, \PartialDer{f}{z}\right) \times (P, Q, R)\\
+                \Rot F &= \begin{vmatrix}
+                            i&j&k\\
+                            \PartialDer{}{x}&\PartialDer{}{y}&\PartialDer{}{z}\\
+                            P&Q&R\end{vmatrix}\\
+            \end{align*}
+
+        \subsection{Divergente}
+            Da mesma forma como o Rotacional, temos o divergente ($\Div F$) que é dado pelo produto escalar:
+            \[
+                \Div F = \nabla \cdot F
+            \]
+
+        \subsection{Exemplos}
+            \begin{example}
+                Determine o rotacional e o divergente de:
+                \[
+                    F(x,y,z) = \FVett{xz}{xyz}{-y^2}
+                \]
+
+                Temos que o rotacional é:
+                \begin{align*}
+                    \Rot F &= \nabla \times F\\
+                    \Rot F &= \FVett{\PartialDer{(-y^2)}{y} - \PartialDer{xyz}{z}}{\PartialDer{xz}{z} - \PartialDer{y^2}{x}}{\PartialDer{xyz}{x} - \PartialDer{xz}{y}}\\
+                    \Rot F &= \FVett{-2y-xy}{x}{yz}
+                \end{align*}
+
+                De forma análoga, temos o divergente:
+                \begin{align*}
+                    \Div F &= \nabla \cdot F\\
+                    \Div F &= \PartialDer{xz}{x} + \PartialDer{xyz}{y} + \PartialDer{(-y^2)}{z}\\
+                    \Div F &= z + xz
+                \end{align*}
+            \end{example}
+
+    \section{Consequências}
+        \begin{theorem}
+            \label{th:rot0}
+            Se $f$ é uma função de três variáveis que tem derivadas parciais de segunda ordem contínuas, então
+            o rotacional do gradiente de $f$ é o vetor nulo, ou seja,
+            \[
+                \Rot \nabla f = \vec{0}
+            \]
+        \end{theorem}
+
+        Esse teorema é facilmente provado pelo teorema de Clairaut.
+
+        Agora, sabemos que $\vec{F}$ é um campo vetorial conservativo se $\vec{F} = \nabla f$ para alguma
+        função escalar $f$. Note então que se $\vec{F}$ é um campo conservativo, então $\Rot \nabla \vec{F} = 0$.
+        Então, temos que se $\Rot \nabla \vec{F} \neq 0$, então o campo não é conservativo.
+
+        A recíproca do Teorema~\ref{th:rot0} pode ser enunciado da seguinte forma:
+        \begin{theorem}
+            Se $\vec{F}$ for um campo vetorial definido sobre todo $\REAL^3$ cujas funções componentes possuem derivadas
+            de segunda ordem contínuas e $\Rot \vec{F} = \vec{0}$, então $F$ será um campo conservativo.
+        \end{theorem}
+
+        \begin{theorem}
+            \label{th:divrot0}
+            Se $\vec{F}$ é um campo vetorial sobre $\REAL^3$ e suas componentes têm derivadas parciais de segunda ordem
+            contínuas, então
+            \[
+                \Div \Rot \vec{F} = 0
+            \]
+        \end{theorem}
+
+        O Teorema~\ref{th:divrot0} também pode ser demonstrado pelo Teorema de Clairaut. Além disso, ele nos diz se algum campo
+        vetorial é divergente de outro campo vetorial. Caso o $\Div \Rot \vec{F} \neq 0$, então $\vec{F}$ não é rotacional de outro
+        campo vetorial.
+
+        \subsection{Operador e Equação de Laplace}
+            Temos que o operador de Laplace ou laplaciano, denotado por $\nabla^2$ temos:
+            \[
+                \nabla^2 f := \nabla \cdot \nabla f = \Div \nabla f
+            \]
+
+        \subsection{Exemplos}
+            \begin{example}
+                \begin{enumerate}
+                    \item
+                        Mostre que o campo vetorial
+                        \[
+                            \vec{F}(x,y,z) = \FVett{y^2z^3}{2xyz^3}{3xy^2z^2}
+                        \]
+                        é conservativo.
+
+                        Como temos as componentes de $\vec{F}$ polinômios, então as derivadas de segunda ordem são contínuas
+                        em todo $\REAL^3$.
+
+                        Vamos verificar então seu rotacional:
+                        \begin{align*}
+                            \Rot \vec{F} &= \begin{vmatrix}
+                                            i&j&k\\
+                                            \PartialDer{}{x}&\PartialDer{}{y}&\PartialDer{}{z}\\
+                                            (y^2z^3) & (2xyz^3) & (3xy^2z^2)
+                                            \end{vmatrix}\\
+                            \Rot \vec{F} &= \vec{0}
+                        \end{align*}
+
+                    \item
+                        Determine uma função potencial $f$ tal que $\vec{F} = \nabla f$.
+
+                        Sabemos que:
+                        \begin{align*}
+                            \PartialDer{f}{x} &= P\\
+                            f(x,y,z) &= \int y^2z^3 dx = xy^2z^3 + g(y, z)\\
+                            \PartialDer{f}{y} &= Q\\
+                            2xyz^3 + \PartialDer{g}{y} &= 2xyz^3\\
+                            \PartialDer{g}{y} &= 0\\
+                            g(y, z) &= h(z)\\
+                            \PartialDer{f}{z} &= R\\
+                            3xy^2z^2 + h^\prime (z) &= 3xy^2z^2\\
+                            h^\prime(z) &= 0 \Rightarrow h(z) = K \in \REAL\\
+                            f(x,y,z) &= xy^2z^3 + K
+                        \end{align*}
+
+                        Assim encontramos $f$ tal que $\vec{F} = \nabla f$.
+                \end{enumerate}
+            \end{example}
+
+        \subsection{Formas vetoriais do Teorema de Green}
+            Sabemos que:
+            \[
+                \int_C Pdx + Qdy = \doubleint{D}{\left( \PartialDer{Q}{x} - \PartialDer{P}{y} \right) dA}
+            \]
+
+            Além disso, podemos facilmente mostrar que se $\vec{F} = \FVett{P(x,y)}{Q(x,y)}{0}$, então:
+            \[
+                \Rot \vec{F} = \left( \PartialDer{Q}{x} - \PartialDer{P}{y} \right) \textbf{k}
+            \]
+            logo, como $\textbf{k} \cdot \textbf{k} = 1$, então
+            \[
+                \Rot \vec{F} \cdot \textbf{k} = \left( \PartialDer{Q}{x} - \PartialDer{P}{y} \right)
+            \]
+
+            Dessa forma, podemos denotar o Teorema de Green como:
+            \[
+                \int_C \vec{F} \cdot d\vec{r} = \doubleint{D}{\Rot \vec{F} \cdot \textbf{k} dA}
+            \]
+
+            Por outro lado, considerando
+            \[
+                \vec{n} = \left( \frac{x^\prime (t)}{\norm{r^\prime (t)}}, \frac{y^\prime (t)}{\norm{r^\prime (t)}}
+ \right)
+            \]
+            
+            Então temos:
+            \begin{align*}
+                \int_C \vec{F} \cdot \vec{n} dS &= \doubleint{D}{\left( \PartialDer{P}{x} + \PartialDer{Q}{y} \right) dA}\\
+                \int_C \vec{F} \cdot \vec{n} dS &= \doubleint{D}{\Div \vec{F} dA}
+            \end{align*}
+\end{document}
