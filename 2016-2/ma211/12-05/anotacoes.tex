@@ -1,0 +1,191 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{graphicx}
+\usepackage{bbm}
+
+\author{Esdras R. Carmo - 170656}
+\title{Integrais de Superfícies}
+\date{\today}
+
+\newcommand{\REAL}{\mathbbm{R}}
+
+% Comando para integrais duplas e triplas
+\newcommand{\doubleint}[2] {\iint\limits_{#1} #2}
+\newcommand{\tripleint}[2] {\iiint\limits_{#1} #2}
+
+% Comando para a norma
+\newcommand{\norm}[1] {\left.\parallel #1 \right.\parallel}
+\newcommand{\PartialDer}[2] {\frac{\partial #1}{\partial #2}}
+
+% Comando para os campos vetoriais
+\newcommand{\FVett}[3] {\left(#1\right) \textbf{i} + \left(#2\right) \textbf{j} + \left(#3\right) \textbf {k}}
+\newcommand{\FVetd}[2] {\left(#1\right) \textbf{i} + \left(#2\right) \textbf{j}}
+
+% Rotacional e Divergente
+\newcommand{\Rot}[0] {\textit{rot }}
+\newcommand{\Div}[0] {\textit{div }}
+
+% theorems
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{example}{Exemplo}[section]
+\newtheorem{definition}{Definição}[section]
+
+
+\begin{document}
+    \maketitle
+
+    \section{Área de Superfícies Parametrizadas}
+        Lembramos que a área do paralelogramo dado por 2 vetores ($u$ e $v$) é dada por:
+        \[
+            S = \norm{u \wedge v}
+        \]
+
+        Portanto, se temos uma superfície parametrizada lisa $S$, então sua área é:
+        \[
+            A(S) = \doubleint{D}{\norm{r_u \wedge r_v}} dA
+        \]
+        onde
+        \begin{align*}
+            r_u &= \PartialDer{r}{u}\\
+            r_v &= \PartialDer{r}{v}\\
+        \end{align*}
+
+        \subsection{Área de Superfície de Gráfico de uma Função}
+            Uma função de duas variáveis pode ser escrita como:
+            \[
+                r(x,y) = (x, y, f(x,y))
+            \]
+
+            Assim encontramos:
+            \begin{align*}
+                \norm{r_x \wedge r_y} &= \sqrt{ \left(\PartialDer{f}{x}\right)^2 + \left(\PartialDer{f}{y}\right)^2 + 1 }
+            \end{align*}
+
+        \subsection{Exemplos}
+            \begin{example}
+                \label{ex:area-esfera}
+
+                Determine a área da esfera de raio $a$.
+
+                Descrevemos então a esfera em coordenadas esféricas:
+                \begin{align*}
+                    x &= a \sin \phi \cos \theta\\
+                    y &= a \sin \phi \sin \theta\\
+                    z &= a \cos \phi\\
+                    r(\phi, \theta) &= (a\sin\phi \cos\theta, a\sin\phi \sin\theta, a\cos\phi)\\
+                    0 &\leq \phi \leq \pi\\
+                    0 &\leq \theta < 2\pi
+                \end{align*}
+
+                Agora precisamos calcular:
+                \begin{align*}
+                    r_\phi &= (a\cos\phi \cos\theta, a\cos\phi \sin\theta, -a\sin\phi)\\
+                    r_\theta &= (-a\sin\phi \sin\theta, a\sin\phi \cos\theta, 0)\\
+                    \norm{r_\phi \wedge r_\theta} &= a^2 \sin\phi
+                \end{align*}
+
+                Logo, podemos encontrar a área:
+                \begin{align*}
+                    A &= \int_0^{2\pi} \int_0^\pi a^2 \sin\phi d\phi d\theta\\
+                    A &= 4\pi a^2
+                \end{align*}
+            \end{example}
+
+
+    \section{Integrais de Superfície de Campo Escalar}
+        Sendo a função $f$ de três variáveis, cujo domínio é dado pela superfície $S$ descrita por
+        \[
+            r(u, v) = (x(u, v), y(u, v), z(u, v))
+        \]
+        então a integral de superfície é:
+        \[
+            \doubleint{S}{f(x,y,z) dS} = \doubleint{D}{f(r(u, v)) \norm{r_u \wedge r_v} dA}
+        \]
+
+        Note que é o mesmo que calcular a área, mas multiplicando pelo valor do campo escalar $f$.
+
+        \subsection{Exemplos}
+            \begin{example}
+                Calcule a integral de superfície
+                \[
+                    \doubleint{S} x^2 dS
+                \]
+                em que $S$ é a esfera unitária $x^2 + y^2 + x^2 = 1$.
+
+                Semelhante ao Exemplo~\ref{ex:area-esfera}, temos:
+                \begin{align*}
+                    x^2 &= \sin^2\phi \cos^2\theta\\
+                    a &= 1\\
+                    I &= \int_0^{2\pi} \int_0^\pi \sin^2\phi \cos^2\theta \sin\phi d\phi d\theta\\
+                    I &= \int_0^{2\pi} \cos^2\theta d\theta \int_0^\pi \sin\phi \sin^2\phi d\phi\\
+                    I &= \frac{1}{2} \int_0^{2\pi} (1 + \cos 2\theta) d\theta \int_0^\pi (\sin\phi - \sin\phi \cos^2\phi) d\phi\\
+                    I &= \frac{1}{2} \left[ \theta + \frac{\sin 2\theta}{2} \right]_0^{2\pi} \int_{-1}^{1} (1 - u^2) du\\
+                    I &= \frac{1}{2} \pi \left[ u - \frac{u^3}{3} \right]_{-1}^1\\
+                    I &= \frac{4\pi}{3}
+                \end{align*}
+            \end{example}
+
+            \begin{example}
+                Calcule
+                \[
+                    \doubleint{S}{y dS}
+                \]
+                em que $S$ é a superfície $z = x + y^2$, $0 \leq x \leq 1$ e $0 \leq y \leq 2$.
+
+                Nesse caso podemos parametrizar a superfície facilmente como:
+                \begin{align*}
+                    r(x, y) &= (x, y, x + y^2)\\
+                    r_x &= (1, 0, 1)\\
+                    r_y &= (0, 1, 2y)\\
+                    r_x \wedge r_y &= (-1, -2y, 1)\\
+                    \norm{r_x \wedge r_y} &= \sqrt{2 + 4y^2}\\
+                \end{align*}
+
+                Portanto, podemos calcular a integral:
+                \begin{align*}
+                    I &= \doubleint{D}{y \norm{r_x \wedge r_y} dA}\\
+                    I &= \int_0^1 \int_0^2 y \sqrt{2 + 4y^2} dy dx\\
+                    I &= \frac{13 \sqrt{2}}{3}
+                \end{align*}
+            \end{example}
+
+    \section{Integrais de Superfície de Campos Vetoriais}
+        Se $\vec{F}$ um campo vetorial, então a integral de superfície de $\vec{F}$ sobre $S$ é:
+        \[
+            \doubleint{S}{\vec{F} \cdot d\vec{S}} = \doubleint{S}{\vec{F} \cdot \vec{n} dS}
+        \]
+        onde $\vec{n}$ é o vetor unitário da superfície $S$. A integral acima também é chamada de fluxo de $\vec{F}$
+        através de $S$.
+        \[
+            \vec{n} = \frac{r_u \wedge r_v}{\norm{r_u \wedge r_v}}
+        \]
+
+        Em outras palavras:
+        \begin{align*}
+            \doubleint{S}{\vec{F} \cdot d\vec{S}} &= \doubleint{D}{\vec{F} \cdot \frac{r_u \wedge r_v}{\norm{r_u \wedge r_v}} \norm{r_u \wedge r_v} dA}\\
+            \doubleint{S}{\vec{F} \cdot d\vec{S}} &= \doubleint{D}{\vec{F} \cdot (r_u \wedge r_v) dA}
+        \end{align*}
+
+        \subsection{Exemplos}
+            \begin{example}
+                Determine o fluxo do campo vetorial $F(x,y,z) = (z, y, x)$ através da esfera unitária.
+
+                Temos então, em coordenadas esféricas:
+                \begin{align*}
+                    r_\phi \wedge r_\theta &= (\sin^2\phi \cos\theta, \sin^2\phi \sin\theta, \sin\phi \cos\phi)\\
+                    \vec{F} &= (\cos\phi, \sin\phi \sin\theta, \sin\phi \cos\theta)\\
+                    \vec{F} \cdot (r_\phi \wedge r_\theta) &= 2\sin^2\phi \cos\phi \cos\theta + \sin^3\phi \sin^2\theta
+                \end{align*}
+
+                Portanto a integral que queremos é:
+                \begin{align*}
+                    I &= \doubleint{E}{\vec{F} \cdot d\vec{E}}\\
+                    I &= \int_0^{\pi} \int_0^{2\pi} (2\sin^2\phi \cos\phi \cos\theta + \sin^3\phi \sin^2\theta) d\theta d\phi\\
+                    I &= \frac{4\pi}{3}
+                \end{align*}
+            \end{example}
+\end{document}
