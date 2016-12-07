@@ -1,0 +1,221 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{graphicx}
+\usepackage{bbm}
+
+\author{Esdras R. Carmo - 170656}
+\title{Teorema de Stokes e do Divergente}
+\date{\today}
+
+\newcommand{\REAL}{\mathbbm{R}}
+
+% Comando para integrais duplas e triplas
+\newcommand{\doubleint}[2] {\iint\limits_{#1} #2}
+\newcommand{\tripleint}[2] {\iiint\limits_{#1} #2}
+
+% Comando para a norma
+\newcommand{\norm}[1] {\left.\parallel #1 \right.\parallel}
+\newcommand{\PartialDer}[2] {\frac{\partial #1}{\partial #2}}
+
+% Comando para os campos vetoriais
+\newcommand{\FVett}[3] {\left(#1\right) \textbf{i} + \left(#2\right) \textbf{j} + \left(#3\right) \textbf {k}}
+\newcommand{\FVetd}[2] {\left(#1\right) \textbf{i} + \left(#2\right) \textbf{j}}
+
+% Rotacional e Divergente
+\newcommand{\Rot}[0] {\textit{rot }}
+\newcommand{\Div}[0] {\textit{div }}
+
+% theorems
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{example}{Exemplo}[section]
+\newtheorem{definition}{Definição}[section]
+
+
+\begin{document}
+    \maketitle
+
+    \section{Teorema de Stokes}
+        Tendo uma superfície $S$ orientada, lisa por partes, cuja fronteira é formada por uma curva $C$
+        fechada, simples, lisa por partes, com orientação positiva. Seja $\vec{F}$ um campo vetorial
+        cujas componentes possuem derivadas parciais contínuas em região aberta de $\REAL^3$ que contém
+        $S$, então tem-se:
+        \[
+            \oint_C \vec{F} \cdot d\vec{r} = \doubleint{S}{\Rot \vec{F} \cdot d\vec{S}}
+        \]
+
+        \subsection{Consequências}
+            Se temos duas superfícies com a mesma fronteira e ambas satisfazendo as hipóteses do Teorema,
+            então a integral sobre suas superfícies do rotacional de $\vec{F}$ são iguais.
+
+            Ainda vimos que se $\Rot \vec{F} = 0$, então o campo é conservativo e a integral de linha
+            sobre um caminho fechado $C$ é zero. Isso é verificado também aplicando o Teorema de Stokes.
+
+        \subsection{Exemplos}
+            \begin{example}
+                Calcule $\oint_C \vec{F} \cdot d\vec{r}$, em que
+                \[
+                    \vec{F}(x,y,z) = (-y^2, x, z^2)
+                \]
+                e $C$ é a curva de intersecção do plano $y + z = 2$ com o cilindro $x^2 + y^2 = 1$
+                (com orientação no sentido anti-horário quando vista por cima).
+
+                Tomamos como superfície o plano em que intersecta o cilindro e está contido dentro dele.
+
+                Calculando o rotacional de $\vec{F}$, temos:
+                \begin{align*}
+                    \Rot \vec{F} &= \vec{\nabla} \wedge \vec{F}\\
+                    \Rot \vec{F} &= (0, 0, 1 + 2y)\\ 
+                \end{align*}
+
+                Então precisamos calcular $\doubleint{S}{(1 + 2y)\vec{k} \cdot d\vec{S}}$.
+
+                Em coordenadas cilindricas, podemos descrever a superfície:
+                \begin{align*}
+                    x &= r\cos\theta\\
+                    y &= r\sin\theta\\
+                    z &= 2 - y = 2 - r\sin\theta\\
+                    1 &\leq r \leq 1\\
+                    0 &\leq \theta \leq 2\pi\\
+                    s(r, \theta) &= (r\cos\theta, r\sin\theta, 2 - r\sin\theta)
+                \end{align*}
+
+                Agora, para calcular a integral de superfície, precisamos:
+                \begin{align*}
+                    s_r &= (\cos\theta, \sin\theta, -\sin\theta)\\
+                    s_\theta &= (-r\sin\theta, r\cos\theta, r\cos\theta)\\
+                    s_r \wedge s_\theta &= (0, r, r)\\
+                \end{align*}
+
+                Note que o produto vetorial retornou um vetor sempre acima à superfície, pois temos as componentes
+                $y$ e $z$ positiva. Dessa forma, caminhando pela curva com a cabeça em sentido ao vetor normal,
+                temos a superfície à nossa esquerda. Logo essa superfície tem orientação positiva.
+
+                Portanto, calculamos a integral $I$:
+                \begin{align*}
+                    I &= \oint_C \vec{F} \cdot d\vec{r}\\
+                    I &= \doubleint{S}{(1 + 2r\sin\theta)\vec{k} \cdot (s_r \wedge s_\theta) dA}\\
+                    I &= \int_0^{2\pi} \int_0^1 (0, 0, 1 + 2r\sin\theta) \cdot (0, r, r) dr d\theta\\
+                    I &= \int_0^{2\pi} \int_0^1 (r + 2r^2\sin\theta) dr d\theta\\
+                    I &= \int_0^{2\pi} \left[\frac{r^2}{2} + \frac{2r^3}{3} \sin\theta \right]_0^1 d\theta\\
+                    I &= \int_0^{2\pi} \left( \frac{1}{2} + \frac{2}{3} \sin\theta \right) d\theta\\
+                    I &= \pi\\
+                \end{align*}
+            \end{example}
+           
+            \begin{example}
+                Calcule a integral $\doubleint{S} \Rot \vec{F} \cdot d\vec{S}$ em que
+                \[
+                    \vec{F} = (xz, yz, xy)
+                \]
+                e $S$ é a parte da esfera $x^2 + y^2 + z^2 = 4$ que está dentro do cilindro $x^2 + y^2 = 1$
+                e acima do plano $xy$.
+
+                Sabemos, pelo teorema de Stokes que podemos calcular a integral $\oint_C \vec{F} \cdot d\vec{r}$
+                onde $C$ é a curva dada pela interseção da esfera com o cilindro.
+
+                Encontrando a interseção:
+                \begin{align*}
+                    x^2 + y^2 + z^2 &= 4\\
+                    x^2 + y^2 &= 1\\
+                    z^2 &= 3\\
+                    z &= \sqrt{3} \textit{, pois } z > 0
+                \end{align*}
+
+                Agora, utilizando coordenadas cilindricas, temos a superfície:
+                \begin{align*}
+                    x &= \cos\theta\\
+                    y &= \sin\theta\\
+                    0 &\leq \theta < 2\pi
+                \end{align*}
+
+                Logo, temos a curva:
+                \begin{align*}
+                    r(\theta) &= (\cos\theta, \sin\theta, \sqrt{3})\\
+                    r^\prime(\theta) &= (-\sin\theta, \cos\theta, 0)\\
+                \end{align*}
+
+                Agora calculamos a integral:
+                \begin{align*}
+                    I &= \oint_C \vec{F} \cdot d\vec{r}\\
+                    I &= \int_0^{2\pi} \vec{F}(\vec{r}(\theta)) \cdot r^\prime(\theta) d\theta\\
+                    I &= \int_0^{2\pi} (\sqrt{3}\cos\theta, \sqrt{3}\sin\theta, \cos\theta\sin\theta) \cdot
+                         (-\sin\theta, \cos\theta, 0) d\theta\\
+                    I &= 0
+                \end{align*}
+            \end{example}
+
+    \section{Teorema do Divergente}
+        Também conhecido como Teorema de Gauss. Estabelece uma relação entre a integral do divergente de um
+        campo vetorial $\vec{F}$ sobre uma região com a integral de $\vec{F}$ sobre a fronteira da
+        região.
+
+        Se $E$ uma região sólida simples e seja $S$ a superfície fronteira de $E$, orientada positivamente.
+        Seja $\vec{F}$ um campo vetorial com derivadas parciais contínuas, tem-se:
+        \[
+            \doubleint{S}{\vec{F} \cdot d\vec{S}} = \tripleint{E}{\Div \vec{F} dV}
+        \]
+
+        \subsection{Exemplos}
+            \begin{example}
+                Determine o fluxo do campo vetorial $\vec{F} = (z, y, x)$ sobre a esfera
+                unitária $x^2 + y^2 + z^2 = 1$.
+
+                Temos, pelo Teorema de Gauss, que:
+                \[
+                    I = \doubleint{S}{\vec{F} \cdot d\vec{S}} = \tripleint{E}{\Div \vec{F} dV}
+                \]
+
+                Calculamos o divergente:
+                \begin{align*}
+                    \Div \vec{F} &= \nabla \cdot \vec{F}\\
+                    \Div \vec{F} &= 1\\
+                \end{align*}
+
+                Logo, temos a integral:
+                \begin{align*}
+                    I &= \tripleint{E}{dV}\\
+                \end{align*}
+
+                Como essa integral retorna o volume da esfera $E$ com raio $1$, temos:
+                \[
+                    I = \frac{4}{3}\pi
+                \]
+            \end{example}
+
+            \begin{example}
+                Calcule
+                \[
+                    I = \doubleint{S}{\vec{F}\cdot d\vec{S}}
+                \]
+                em que:
+                \[
+                    \vec{F} = (xy, y^2 + e^{xz^2}, \sin (xy))
+                \]
+                e $S$ é a superfície da região $E$ limitada pelo cilindro parabólico
+                $z = 1 - x^2$ e pelos planos $z = 0$, $y = 0$, $y + z = 2$.
+
+                Pelo teorema do divergente, temos $I$ como
+                \[
+                    I = \tripleint{E}{\Div \vec{F} dV}
+                \]
+
+                Calculando o divergente:
+                \begin{align*}
+                    \Div \vec{F} &= y + 2y = 3y
+                \end{align*}
+
+                Logo, temos a integral
+                \begin{align*}
+                    I &= \tripleint{E}{3y dV}\\
+                    -1 &\leq x \leq 1\\
+                    0 &\leq z \leq 1 - x^2\\
+                    0 &\leq y \leq 2 - z\\
+                    I &= \int_{-1}^1 \int_0^{1 - x^2} \int_0^{2 - z} 3y dy dz dx\\
+                    I &= \frac{184}{35}
+                \end{align*}
+            \end{example}
+\end{document}
